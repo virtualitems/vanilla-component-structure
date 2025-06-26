@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- STYLES -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100vh;
+      min-width: 100%;
+    }
+
+    body {
+      line-height: 1.15;
+      font-family: sans-serif;
+      font-size: 16px;
+    }
+
+    .clock {
+      background-color: #222;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .clock__text {
+      font-size: 24px;
+      color: #fff;
+      margin: 0;
+      cursor: pointer;
+      user-select: none;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock" data-component>
+    <span class="clock__text">current time:</span>
+  </div>
+
+  <div class="clock" data-component>
+    <span class="clock__text">current time:</span>
+  </div>
+
+  <div class="clock" data-component>
+    <span class="clock__text">current time:</span>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    ((window, roots) => roots.forEach(async root => {
+      const title = root.querySelector('.clock__text');
+      const titleText = title.textContent;
+
+      function updateContent(node) {
+        node.textContent = `${titleText} ${new Date().toLocaleTimeString()}`;
+      }
+
+      updateContent(title);
+      setInterval(() => updateContent(title), 1000);
+    }))(window, document.querySelectorAll('.clock[data-component]'));
+  </script>
+</body>
+
+</html>
