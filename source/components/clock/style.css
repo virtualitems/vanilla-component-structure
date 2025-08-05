@@ -1,0 +1,15 @@
+.clock[data-component] {
+  background-color: #222;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.clock[data-component] .clock__text {
+  font-size: 24px;
+  color: #fff;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  text-transform: uppercase;
+}
