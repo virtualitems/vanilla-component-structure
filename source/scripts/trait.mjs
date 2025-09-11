@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @param {(node: Element, templates: Record<string, HTMLTemplateElement>) => void} callback - The callback function to execute for each element with the specified trait.
  * @param {string} traitName - The name of the trait to search for in the DOM.
