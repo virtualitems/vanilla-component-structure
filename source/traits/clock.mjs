@@ -7,9 +7,11 @@
   (window, nodeList, templateNodeList) => {
     'use strict';
 
-    const templates = Array.from(templateNodeList)
-      .filter(template => template.hasAttribute('id'))
-      .reduce((acc, tem) => (acc[tem.getAttribute('id')] = tem) && acc, {});
+    const templates = Object.freeze(
+      Array.from(templateNodeList)
+        .filter(template => template.hasAttribute('id'))
+        .reduce((acc, tem) => (acc[tem.getAttribute('id')] = tem) && acc, {})
+    );
 
     nodeList.forEach(trait);
 
