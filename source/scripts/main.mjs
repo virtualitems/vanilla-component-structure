@@ -13,4 +13,5 @@ trait(
     }, 1000);
   },
   'trait-clock',
+  'trait-clock-template'
 );
