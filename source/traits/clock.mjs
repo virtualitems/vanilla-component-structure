@@ -1,20 +1,40 @@
-((window, nodes, templates) => {
-  'use strict';
+(
+  /**
+   * @description A simple clock trait that updates the time every second.
+   *
+   * @param {Window} window Browser window object
+   * @param {NodeList} nodeList Nodes with the trait-clock attribute
+   * @param {NodeList} templateNodeList Nodes with the trait-clock-template attribute
+   */
+  (window, nodeList, templateNodeList) => {
+    'use strict';
 
-  nodes.forEach(node => {
-    let date = new Date();
+    const templates = Array.from(templateNodeList)
+      .filter(template => template.hasAttribute('id'))
+      .reduce((acc, tem) => (acc[tem.getAttribute('id')] = tem) && acc, {});
 
-    node.textContent = date.toLocaleTimeString();
+    nodeList.forEach(trait);
 
-    setInterval(() => {
-      date = new Date();
+    /**
+     * @description Updates the text content of the node to the current time every second.
+     *
+     * @param {*} node A DOM node with the trait-clock attribute
+     */
+    function trait(node) {
+
+      let date = new Date();
+
       node.textContent = date.toLocaleTimeString();
-    }, 1000);
 
-  });
+      setInterval(() => {
+        date = new Date();
+        node.textContent = date.toLocaleTimeString();
+      }, 1000);
 
-})(
-  window,
-  document.querySelectorAll('[trait-clock]'),
-  document.querySelectorAll('[trait-clock-template]'),
-);
+    }
+
+  })(
+    window,
+    document.querySelectorAll('[trait-clock]'),
+    document.querySelectorAll('[trait-clock-template]'),
+  );
