@@ -13,6 +13,7 @@
   transition: all 0.3s ease;
   min-width: 200px;
   text-align: center;
+  user-select: none;
 }
 
 [trait-clock]:hover {
