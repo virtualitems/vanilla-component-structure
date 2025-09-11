@@ -13,15 +13,7 @@
         .reduce((acc, tem) => (acc[tem.getAttribute('id')] = tem) && acc, {})
     );
 
-    nodeList.forEach(trait);
-
-    /**
-     * @description Updates the text content of the node to the current time every second.
-     *
-     * @param {*} node A DOM node with the trait-clock attribute
-     */
-    function trait(node) {
-
+    nodeList.forEach((node) => {
       let date = new Date();
 
       node.textContent = date.toLocaleTimeString();
@@ -30,8 +22,7 @@
         date = new Date();
         node.textContent = date.toLocaleTimeString();
       }, 1000);
-
-    }
+    });
 
   })(
     window,
