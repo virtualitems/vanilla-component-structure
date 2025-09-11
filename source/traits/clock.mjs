@@ -1,7 +1,5 @@
 (
   /**
-   * @description A simple clock trait that updates the time every second.
-   *
    * @param {Window} window Browser window object
    * @param {NodeList} nodeList Nodes with the trait-clock attribute
    * @param {NodeList} templateNodeList Nodes with the trait-clock-template attribute
