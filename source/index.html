@@ -2,30 +2,21 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-
-  <!-- STYLES -->
   <link rel="stylesheet" href="styles/global.css">
-  <link rel="stylesheet" href="components/clock/style.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/traits/clock.css">
 </head>
 
 <body>
-  <div class="clock" data-component>
-    <span class="clock__text">current time:</span>
-  </div>
-
-  <div class="clock" data-component>
-    <span class="clock__text">current time:</span>
-  </div>
-
-  <div class="clock" data-component>
-    <span class="clock__text">current time:</span>
-  </div>
-
-  <!-- SCRIPTS -->
-  <script type="module" src="scripts/clock/script.mjs"></script>
+  <main>
+    <div trait-clock></div>
+    <div trait-clock></div>
+    <div trait-clock></div>
+  </main>
+  <script type="module" src="traits/clock.mjs"></script>
 </body>
 
 </html>
