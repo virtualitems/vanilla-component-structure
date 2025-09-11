@@ -3,6 +3,7 @@
    * @param {Window} window Browser window object
    * @param {NodeList} nodeList Nodes with the trait-clock attribute
    * @param {NodeList} templateNodeList Nodes with the trait-clock-template attribute
+   * @param {(window: Window, node: Node, templates: Record<string, HTMLTemplateElement>) => void} callback Callback function to apply the trait behavior
    */
   (window, nodeList, templateNodeList, callback) => {
     const templates = {};
@@ -18,12 +19,6 @@
     window,
     document.querySelectorAll('[trait-clock]'),
     document.querySelectorAll('[trait-clock-template]'),
-    /**
-     *
-     * @param {Window} window
-     * @param {Node} node
-     * @param {Record<string, HTMLTemplateElement>} templates
-     */
     (window, node, templates) => {
       'use strict';
       console.debug('trait-clock', window, node, templates);
