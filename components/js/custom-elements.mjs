@@ -20,14 +20,22 @@ export class BaseCustomElement extends HTMLElement {
       throw new TypeError('BaseCustomElement is an abstract class and cannot be instantiated directly.');
     }
 
+    const { htmlString, cssString } = this.constructor;
+
     // shadow
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = this.constructor.htmlString;
 
-    // styles
-    const stylesheet = new CSSStyleSheet();
-    stylesheet.replace(this.constructor.cssString);
-    this.shadowRoot.adoptedStyleSheets.push(stylesheet);
+    if (typeof htmlString === 'string' && htmlString.length > 0) {
+      this.shadowRoot.innerHTML = htmlString;
+    }
+
+    // // styles
+
+    if (typeof cssString === 'string' && cssString.length > 0) {
+      const stylesheet = new CSSStyleSheet();
+      stylesheet.replace(cssString);
+      this.shadowRoot.adoptedStyleSheets.push(stylesheet);
+    }
   }
 
 }
@@ -44,27 +52,23 @@ export async function defineCustomElement(tagName, constructor, sources, options
 
   const proms = [];
 
-  if (sources?.html !== null) {
-    proms.push(fetch(sources.html).then(res => {
-      if (res.ok === false) throw new Error(res.statusText);
-      return res.text();
-    })
-    .then(content => {
-      constructor.htmlString = content;
-    }));
+  if (sources?.html !== undefined) {
+    proms.push(
+      fetch(sources.html)
+        .then(r => r.ok ? r.text() : Promise.reject(r.statusText))
+        .then(content => constructor.htmlString = content)
+    );
   }
 
-  if (sources?.css !== null) {
-    proms.push(fetch(sources.css).then(res => {
-      if (res.ok === false) throw new Error(res.statusText);
-      return res.text();
-    })
-    .then(content => {
-      constructor.cssString = content;
-    }));
+  if (sources?.css !== undefined) {
+    proms.push(
+      fetch(sources.css)
+        .then(r => r.ok ? r.text() : Promise.reject(r.statusText))
+        .then(content => constructor.cssString = content)
+    );
   }
 
-  await Promise.all(proms);
+  await Promise.all(proms).catch(console.error);
 
   customElements.define(tagName, constructor, options);
 }
