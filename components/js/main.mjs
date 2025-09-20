@@ -1,3 +1,3 @@
 import { WebComponent } from './WebComponent.mjs';
 
-customElements.define(WebComponent.tagName, WebComponent);
+WebComponent.define('./html/WebComponent.html', './css/WebComponent.css');

@@ -2,6 +2,10 @@ export class BaseCustomElement extends HTMLElement {
 
   static tagName = null;
 
+  static htmlSource = null;
+
+  static cssSource = null;
+
   static eventNames = Object.freeze({});
 
   constructor() {
@@ -19,14 +23,24 @@ export class BaseCustomElement extends HTMLElement {
   }
 
   async loadHtml() {
-    const response = await fetch(this.getAttribute('data-html'));
+
+    if (this.constructor.htmlSource === null) {
+      throw new Error('htmlSource is not defined.');
+    }
+
+    const response = await fetch(this.constructor.htmlSource);
     const content = await response.text();
 
     this.shadowRoot.innerHTML = content;
   }
 
   async loadCss() {
-    const response = await fetch(this.getAttribute('data-css'));
+
+    if (this.constructor.cssSource === null) {
+      throw new Error('cssSource is not defined.');
+    }
+
+    const response = await fetch(this.constructor.cssSource);
 
     if (response.ok === false) {
       throw new Error(response.statusText);
@@ -42,9 +56,12 @@ export class BaseCustomElement extends HTMLElement {
   async render() {
     this.loadCss();
     await this.loadHtml();
+    this.readyCallback?.();
+  }
 
-    if (this.readyCallback instanceof Function) {
-      this.readyCallback();
-    }
+  static define(htmlSource, cssSource) {
+    this.htmlSource = htmlSource;
+    this.cssSource = cssSource;
+    customElements.define(this.tagName, this);
   }
 }
