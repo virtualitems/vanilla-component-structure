@@ -1,3 +1,24 @@
+class IdGenerator {
+  constructor(start = 0) {
+    this.current = start;
+    this.map = new WeakMap();
+  }
+  getId(obj) {
+    return this.map.get(obj);
+  }
+  setId(obj) {
+    if (this.map.has(obj)) {
+      return this.map.get(obj);
+    }
+    this.current += 1;
+    this.map.set(obj, this.current);
+
+    return this.current;
+  }
+}
+
+const idGenerator = new IdGenerator();
+
 export class BaseCustomElement extends HTMLElement {
 
   /**
@@ -20,6 +41,8 @@ export class BaseCustomElement extends HTMLElement {
       throw new TypeError('BaseCustomElement is an abstract class and cannot be instantiated directly.');
     }
 
+    this.dataset.key = idGenerator.setId(this);
+
     const { htmlString, cssString } = this.constructor;
 
     // shadow
@@ -29,8 +52,7 @@ export class BaseCustomElement extends HTMLElement {
       this.shadowRoot.innerHTML = htmlString;
     }
 
-    // // styles
-
+    // styles
     if (typeof cssString === 'string' && cssString.length > 0) {
       const stylesheet = new CSSStyleSheet();
       stylesheet.replace(cssString);
@@ -72,4 +94,3 @@ export async function defineCustomElement(tagName, constructor, sources, options
 
   customElements.define(tagName, constructor, options);
 }
-

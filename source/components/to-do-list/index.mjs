@@ -1,4 +1,5 @@
 import { BaseCustomElement } from '../custom-elements.mjs';
+import { toDoItems } from '../../js/states.mjs';
 
 export default class extends BaseCustomElement {
 
@@ -17,7 +18,6 @@ export default class extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    this.addEventListener('click', this.handleClick);
   }
 
   /**
@@ -39,14 +39,6 @@ export default class extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    this.removeEventListener('click', this.handleClick);
   }
 
-  /**
-   * @param {MouseEvent} event
-   */
-  handleClick(event) {
-    console.log('ƒ handleClick');
-    this.classList.toggle('active');
-  }
 }

@@ -17,7 +17,10 @@ export default class extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    this.addEventListener('click', this.handleClick);
+    const element = this;
+    this.shadowRoot.querySelector('to-do-delete-button').addEventListener('click', (event) => {
+      element.remove();
+    });
   }
 
   /**
@@ -39,14 +42,6 @@ export default class extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    this.removeEventListener('click', this.handleClick);
   }
 
-  /**
-   * @param {MouseEvent} event
-   */
-  handleClick(event) {
-    console.log('ƒ handleClick');
-    this.classList.toggle('active');
-  }
 }
