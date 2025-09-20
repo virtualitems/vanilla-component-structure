@@ -1,5 +1,5 @@
-import { defineCustomElement } from './custom-elements.mjs';
-import { WebComponent } from './WebComponent.mjs';
+import { defineCustomElement } from '../components/custom-elements.mjs';
+import { WebComponent } from '../components/WebComponent/index.mjs';
 
 defineCustomElement('web-component', WebComponent, {
   html: './components/WebComponent/index.html',

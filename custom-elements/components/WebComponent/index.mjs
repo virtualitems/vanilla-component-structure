@@ -1,4 +1,4 @@
-import { BaseCustomElement } from './custom-elements.mjs';
+import { BaseCustomElement } from '../custom-elements.mjs';
 
 export class WebComponent extends BaseCustomElement {
 
