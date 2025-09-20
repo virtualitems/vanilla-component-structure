@@ -1,11 +1,11 @@
 import { defineCustomElement } from '../components/custom-elements.mjs';
-import { WebComponent } from '../components/WebComponent/index.mjs';
+import { WebComponent } from '../components/web-component/index.mjs';
 
 defineCustomElement('web-component', WebComponent, {
-  html: './components/WebComponent/index.html',
-  css: './components/WebComponent/index.css',
+  html: './components/web-component/index.html',
+  css: './components/web-component/index.css',
   lang: {
-    es: './components/WebComponent/lang/es.json',
-    en: './components/WebComponent/lang/en.json'
+    es: './components/web-component/lang/es.json',
+    en: './components/web-component/lang/en.json'
   }
 });
