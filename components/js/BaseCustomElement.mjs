@@ -2,10 +2,6 @@ export class BaseCustomElement extends HTMLElement {
 
   static tagName = null;
 
-  static htmlString = null;
-
-  static cssString = null;
-
   static eventNames = Object.freeze({});
 
   constructor() {
@@ -17,12 +13,38 @@ export class BaseCustomElement extends HTMLElement {
 
     // shadow
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = this.constructor.htmlString;
 
-    // css
+    // render
+    this.render();
+  }
+
+  async loadHtml() {
+    const response = await fetch(this.getAttribute('data-html'));
+    const content = await response.text();
+
+    this.shadowRoot.innerHTML = content;
+  }
+
+  async loadCss() {
+    const response = await fetch(this.getAttribute('data-css'));
+
+    if (response.ok === false) {
+      throw new Error(response.statusText);
+    }
+
+    const content = await response.text();
+
     const stylesheet = new CSSStyleSheet();
-    stylesheet.replaceSync(this.constructor.cssString);
+    await stylesheet.replace(content);
     this.shadowRoot.adoptedStyleSheets.push(stylesheet);
+  }
 
+  async render() {
+    this.loadCss();
+    await this.loadHtml();
+
+    if (this.readyCallback instanceof Function) {
+      this.readyCallback();
+    }
   }
 }
