@@ -1,4 +1,4 @@
-import { BaseCustomElement } from './BaseCustomElement.mjs';
+import { BaseCustomElement } from './custom-elements.mjs';
 
 export class WebComponent extends BaseCustomElement {
 
@@ -17,13 +17,6 @@ export class WebComponent extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-  }
-
-  /**
-   * @function
-   */
-  readyCallback() {
-    console.log('ƒ readyCallback');
     this.addEventListener('click', this.handleClick);
   }
 
@@ -57,10 +50,3 @@ export class WebComponent extends BaseCustomElement {
     this.classList.toggle('active');
   }
 }
-
-/**
- * Custom element tag name
- *
- * @type {string}
- */
-WebComponent.tagName = 'web-component';
