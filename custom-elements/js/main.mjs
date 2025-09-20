@@ -2,6 +2,10 @@ import { defineCustomElement } from './custom-elements.mjs';
 import { WebComponent } from './WebComponent.mjs';
 
 defineCustomElement('web-component', WebComponent, {
-  html: './html/WebComponent.html',
-  css: './css/WebComponent.css'
+  html: './components/WebComponent/index.html',
+  css: './components/WebComponent/index.css',
+  lang: {
+    es: './components/WebComponent/lang/es.json',
+    en: './components/WebComponent/lang/en.json'
+  }
 });
