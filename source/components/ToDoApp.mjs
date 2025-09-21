@@ -50,7 +50,7 @@ export class ToDoApp extends BaseCustomElement {
 ToDoApp.htmlString = `
   <section>
     <h1>To-Do App</h1>
-    <todo-creator></todo-creator>
+    <todo-creator data-form-method="post" data-form-action="#"></todo-creator>
     <todo-list></todo-list>
   </section>
 `;

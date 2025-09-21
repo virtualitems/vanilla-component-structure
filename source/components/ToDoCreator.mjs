@@ -22,6 +22,15 @@ export class ToDoCreator extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
+    const formMethod = this.getAttribute('data-form-method');
+    const formAction = this.getAttribute('data-form-action');
+
+    const formElement = this.shadowRoot.querySelector('form');
+
+    if (formElement) {
+      formElement.method = formMethod;
+      formElement.action = formAction;
+    }
   }
 
   /**
