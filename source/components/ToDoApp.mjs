@@ -1,6 +1,6 @@
-import { BaseCustomElement } from '../custom-elements.mjs';
+import { BaseCustomElement } from './BaseCustomElement.mjs';
 
-export default class extends BaseCustomElement {
+export class ToDoApp extends BaseCustomElement {
 
   /**
    * @function
@@ -41,3 +41,18 @@ export default class extends BaseCustomElement {
   }
 
 }
+
+ToDoApp.htmlString = `
+  <div>
+    <h1>To-Do App</h1>
+    <to-do-add-form></to-do-add-form>
+    <to-do-list></to-do-list>
+  </div>
+`;
+
+ToDoApp.cssString = `
+  :host h1 {
+    margin: 0;
+    padding: 0;
+  }
+`;

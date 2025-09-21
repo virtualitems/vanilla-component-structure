@@ -1,5 +1,4 @@
-import { BaseCustomElement } from '../custom-elements.mjs';
-import { toDoItems } from '../../js/states.mjs';
+import { BaseCustomElement } from '../BaseCustomElement.mjs';
 
 export default class extends BaseCustomElement {
 

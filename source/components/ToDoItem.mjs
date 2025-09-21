@@ -1,6 +1,6 @@
-import { BaseCustomElement } from '../custom-elements.mjs';
+import { BaseCustomElement } from './BaseCustomElement.mjs';
 
-export default class extends BaseCustomElement {
+export class ToDoItem extends BaseCustomElement {
 
   /**
    * @function
@@ -45,3 +45,12 @@ export default class extends BaseCustomElement {
   }
 
 }
+
+ToDoItem.htmlString = `
+  <li>
+    <slot></slot>
+    <to-do-delete-button>&times;</to-do-delete-button>
+  </li>
+`;
+
+ToDoItem.cssString = ``;

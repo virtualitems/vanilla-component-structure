@@ -1,4 +1,4 @@
-import { BaseCustomElement } from '../custom-elements.mjs';
+import { BaseCustomElement } from '../BaseCustomElement.mjs';
 
 export default class extends BaseCustomElement {
 
