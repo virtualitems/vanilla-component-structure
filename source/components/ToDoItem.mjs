@@ -18,7 +18,7 @@ export class ToDoItem extends BaseCustomElement {
   connectedCallback() {
     console.log('ƒ connectedCallback');
     const element = this;
-    this.shadowRoot.querySelector('to-do-delete-button').addEventListener('click', (event) => {
+    this.shadowRoot.querySelector('todo-button').addEventListener('click', (event) => {
       element.remove();
     });
   }
@@ -49,7 +49,7 @@ export class ToDoItem extends BaseCustomElement {
 ToDoItem.htmlString = `
   <li>
     <slot></slot>
-    <to-do-delete-button>&times;</to-do-delete-button>
+    <todo-button class="danger">&times;</todo-button>
   </li>
 `;
 

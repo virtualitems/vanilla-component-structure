@@ -1,6 +1,6 @@
 import { BaseCustomElement } from './BaseCustomElement.mjs';
 
-export class ToDoDeleteButton extends BaseCustomElement {
+export class ToDoButton extends BaseCustomElement {
 
   /**
    * @function
@@ -42,16 +42,15 @@ export class ToDoDeleteButton extends BaseCustomElement {
 
 }
 
-ToDoDeleteButton.htmlString = `
+ToDoButton.htmlString = `
   <button type="button">
     <slot></slot>
   </button>
 `;
 
-ToDoDeleteButton.cssString = `
+ToDoButton.cssString = `
   :host button {
-    background-color: #f44336;
-    border: none;
+    background-color: #008CBA;
     color: white;
     padding: 2px 5px;
     text-align: center;
@@ -62,16 +61,26 @@ ToDoDeleteButton.cssString = `
     cursor: pointer;
     transition-duration: 0.4s;
     border-radius: 5px;
-    border: 2px solid #f44336;
+    border: 1px solid #008CBA;
   }
 
-  :host button:hover {
+  :host button:hover,
+  :host button:active {
     background-color: white;
     color: black;
-    border: 2px solid #f44336;
+    border: 1px solid #008CBA;
   }
 
-  :host button:active {
+  :host(.danger) button {
     background-color: #f44336;
+    border: 1px solid #f44336;
+    color: white;
+  }
+
+  :host(.danger) button:hover,
+  :host(.danger) button:active {
+    background-color: white;
+    color: black;
+    border: 1px solid #f44336;
   }
 `;

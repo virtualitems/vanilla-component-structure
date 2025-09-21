@@ -45,8 +45,8 @@ export class ToDoApp extends BaseCustomElement {
 ToDoApp.htmlString = `
   <div>
     <h1>To-Do App</h1>
-    <to-do-add-form></to-do-add-form>
-    <to-do-list></to-do-list>
+    <todo-creator></todo-creator>
+    <todo-list></todo-list>
   </div>
 `;
 

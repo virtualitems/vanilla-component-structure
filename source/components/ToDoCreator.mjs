@@ -1,6 +1,6 @@
 import { BaseCustomElement } from './BaseCustomElement.mjs';
 
-export class ToDoAddButton extends BaseCustomElement {
+export class ToDoCreator extends BaseCustomElement {
 
   /**
    * @function
@@ -17,6 +17,16 @@ export class ToDoAddButton extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
+    this.shadowRoot.querySelector('todo-button').addEventListener('click', (event) => {
+      this.shadowRoot.querySelector('form').submit();
+    });
+
+    this.shadowRoot.querySelector('form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = this.shadowRoot.querySelector('input');
+      alert(`New to-do: ${input.value}`);
+      input.value = '';
+    });
   }
 
   /**
@@ -42,36 +52,11 @@ export class ToDoAddButton extends BaseCustomElement {
 
 }
 
-ToDoAddButton.htmlString = `
-  <button type="button">
-    <slot></slot>
-  </button>
+ToDoCreator.htmlString = `
+  <form method="post" action="#">
+    <input type="text" name="new-task" placeholder="New task" />
+    <todo-button>Add</todo-button>
+  </form>
 `;
 
-ToDoAddButton.cssString = `
-  :host button {
-    background-color: #008CBA;
-    border: none;
-    color: white;
-    padding: 2px 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    border: 2px solid #008CBA;
-  }
-
-  :host button:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  :host button:active {
-    background-color: #008CBA;
-  }
-`;
+ToDoCreator.cssString = ``;

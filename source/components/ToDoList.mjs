@@ -44,9 +44,9 @@ export class ToDoList extends BaseCustomElement {
 
 ToDoList.htmlString = `
   <ul>
-    <to-do-item>Item 1</to-do-item>
-    <to-do-item>Item 2</to-do-item>
-    <to-do-item>Item 3</to-do-item>
+    <todo-item>Item 1</todo-item>
+    <todo-item>Item 2</todo-item>
+    <todo-item>Item 3</todo-item>
   </ul>
 `;
 
