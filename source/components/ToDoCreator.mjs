@@ -3,6 +3,11 @@ import { BaseCustomElement } from './BaseCustomElement.mjs';
 export class ToDoCreator extends BaseCustomElement {
 
   /**
+   * @type {string}
+   */
+  static tagName = 'todo-creator';
+
+  /**
    * @function
    * @static
    *
@@ -17,16 +22,6 @@ export class ToDoCreator extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    this.shadowRoot.querySelector('todo-button').addEventListener('click', (event) => {
-      this.shadowRoot.querySelector('form').submit();
-    });
-
-    this.shadowRoot.querySelector('form').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const input = this.shadowRoot.querySelector('input');
-      alert(`New to-do: ${input.value}`);
-      input.value = '';
-    });
   }
 
   /**
@@ -53,7 +48,7 @@ export class ToDoCreator extends BaseCustomElement {
 }
 
 ToDoCreator.htmlString = `
-  <form method="post" action="#">
+  <form>
     <input type="text" name="new-task" placeholder="New task" />
     <todo-button>Add</todo-button>
   </form>

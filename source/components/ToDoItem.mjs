@@ -3,6 +3,11 @@ import { BaseCustomElement } from './BaseCustomElement.mjs';
 export class ToDoItem extends BaseCustomElement {
 
   /**
+   * @type {string}
+   */
+  static tagName = 'todo-item';
+
+  /**
    * @function
    * @static
    *
@@ -17,10 +22,6 @@ export class ToDoItem extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    const element = this;
-    this.shadowRoot.querySelector('todo-button').addEventListener('click', (event) => {
-      element.remove();
-    });
   }
 
   /**

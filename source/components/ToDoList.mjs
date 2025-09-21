@@ -3,6 +3,11 @@ import { BaseCustomElement } from './BaseCustomElement.mjs';
 export class ToDoList extends BaseCustomElement {
 
   /**
+   * @type {string}
+   */
+  static tagName = 'todo-list';
+
+  /**
    * @function
    * @static
    *

@@ -3,6 +3,11 @@ import { BaseCustomElement } from './BaseCustomElement.mjs';
 export class ToDoApp extends BaseCustomElement {
 
   /**
+   * @type {string}
+   */
+  static tagName = 'todo-app';
+
+  /**
    * @function
    * @static
    *
@@ -43,11 +48,11 @@ export class ToDoApp extends BaseCustomElement {
 }
 
 ToDoApp.htmlString = `
-  <div>
+  <section>
     <h1>To-Do App</h1>
     <todo-creator></todo-creator>
     <todo-list></todo-list>
-  </div>
+  </section>
 `;
 
 ToDoApp.cssString = `

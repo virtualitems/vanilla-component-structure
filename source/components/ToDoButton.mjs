@@ -3,6 +3,11 @@ import { BaseCustomElement } from './BaseCustomElement.mjs';
 export class ToDoButton extends BaseCustomElement {
 
   /**
+   * @type {string}
+   */
+  static tagName = 'todo-button';
+
+  /**
    * @function
    * @static
    *
@@ -43,7 +48,7 @@ export class ToDoButton extends BaseCustomElement {
 }
 
 ToDoButton.htmlString = `
-  <button type="button">
+  <button>
     <slot></slot>
   </button>
 `;

@@ -1,6 +1,11 @@
 export class BaseCustomElement extends HTMLElement {
 
   /**
+   * @type {string}
+   */
+  static tagName = '';
+
+  /**
    * @type {string|null}
    */
   static htmlString = null;
