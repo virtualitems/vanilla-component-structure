@@ -1,11 +1,11 @@
 import { BaseCustomElement } from './BaseCustomElement.mjs';
 
-export class ToDoApp extends BaseCustomElement {
+export class NotesApp extends BaseCustomElement {
 
   /**
    * @type {string}
    */
-  static tagName = 'todo-app';
+  static tagName = 'notes-app';
 
   /**
    * @function
@@ -47,15 +47,15 @@ export class ToDoApp extends BaseCustomElement {
 
 }
 
-ToDoApp.htmlString = `
+NotesApp.htmlString = `
   <section>
-    <h1>To-Do App</h1>
-    <todo-creator data-form-method="post" data-form-action="#"></todo-creator>
-    <todo-list></todo-list>
+    <h1>Notes App</h1>
+    <notes-creator data-form-method="post" data-form-action="#"></notes-creator>
+    <notes-list></notes-list>
   </section>
 `;
 
-ToDoApp.cssString = `
+NotesApp.cssString = `
   :host h1 {
     margin: 0;
     padding: 0;

@@ -1,11 +1,11 @@
-import { ToDoCreator } from '../components/ToDoCreator.mjs';
-import { ToDoApp } from '../components/ToDoApp.mjs';
-import { ToDoButton } from '../components/ToDoButton.mjs';
-import { ToDoItem } from '../components/ToDoItem.mjs';
-import { ToDoList } from '../components/ToDoList.mjs';
+import { ActionButton } from '../components/ActionButton.mjs';
+import { NoteItem } from '../components/NoteItem.mjs';
+import { NotesApp } from '../components/NotesApp.mjs';
+import { NotesCreator } from '../components/NotesCreator.mjs';
+import { NotesList } from '../components/NotesList.mjs';
 
-customElements.define(ToDoApp.tagName, ToDoApp);
-customElements.define(ToDoButton.tagName, ToDoButton);
-customElements.define(ToDoCreator.tagName, ToDoCreator);
-customElements.define(ToDoItem.tagName, ToDoItem);
-customElements.define(ToDoList.tagName, ToDoList);
+customElements.define(ActionButton.tagName, ActionButton);
+customElements.define(NoteItem.tagName, NoteItem);
+customElements.define(NotesApp.tagName, NotesApp);
+customElements.define(NotesCreator.tagName, NotesCreator);
+customElements.define(NotesList.tagName, NotesList);

@@ -1,11 +1,11 @@
 import { BaseCustomElement } from './BaseCustomElement.mjs';
 
-export class ToDoButton extends BaseCustomElement {
+export class ActionButton extends BaseCustomElement {
 
   /**
    * @type {string}
    */
-  static tagName = 'todo-button';
+  static tagName = 'action-button';
 
   /**
    * @function
@@ -47,13 +47,13 @@ export class ToDoButton extends BaseCustomElement {
 
 }
 
-ToDoButton.htmlString = `
+ActionButton.htmlString = `
   <button>
     <slot></slot>
   </button>
 `;
 
-ToDoButton.cssString = `
+ActionButton.cssString = `
   :host button {
     background-color: #008CBA;
     color: white;

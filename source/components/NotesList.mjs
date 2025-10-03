@@ -1,11 +1,11 @@
 import { BaseCustomElement } from './BaseCustomElement.mjs';
 
-export class ToDoItem extends BaseCustomElement {
+export class NotesList extends BaseCustomElement {
 
   /**
    * @type {string}
    */
-  static tagName = 'todo-item';
+  static tagName = 'notes-list';
 
   /**
    * @function
@@ -47,11 +47,12 @@ export class ToDoItem extends BaseCustomElement {
 
 }
 
-ToDoItem.htmlString = `
-  <li>
-    <slot></slot>
-    <todo-button class="danger">&times;</todo-button>
-  </li>
+NotesList.htmlString = `
+  <ul>
+    <note-item>Note 1</note-item>
+    <note-item>Note 2</note-item>
+    <note-item>Note 3</note-item>
+  </ul>
 `;
 
-ToDoItem.cssString = ``;
+NotesList.cssString = ``;
