@@ -1,27 +1,27 @@
 import { BaseCustomElement } from '../elements.mjs';
 import { EventHandler } from '../events.mjs';
-import { notesState } from '../states/notes.mjs';
 
 class ButtonClickHandler extends EventHandler {
-  handleEvent(event) {
+  handleEvent() {
     this.host.shadowRoot.querySelector('form').requestSubmit();
   }
 }
 
 class SubmitFormHandler extends EventHandler {
+
   handleEvent(event) {
     event.preventDefault();
     event.stopPropagation();
 
     const form = event.target;
 
-    const currentState = notesState.value;
+    const value = form.elements['text'].value;
 
-    notesState.next([
-      ...currentState,
-      { text: form.elements['text'].value }
-    ]);
+    if (String(value).trim() === '') {
+      return;
+    }
 
+    this.host.dispatchCustomEvent('note.create', { text: value });
     form.reset();
   }
 }
