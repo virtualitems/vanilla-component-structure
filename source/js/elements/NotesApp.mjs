@@ -49,8 +49,10 @@ export class NotesApp extends BaseCustomElement {
 
 NotesApp.htmlString = `
   <section>
-    <h1>Notes App</h1>
-    <notes-creator data-form-method="post" data-form-action="#"></notes-creator>
+    <div>
+      <h1>Notes App</h1>
+      <notes-creator data-form-method="post" data-form-action="#"></notes-creator>
+    </div>
     <notes-list></notes-list>
   </section>
 `;
@@ -59,5 +61,12 @@ NotesApp.cssString = `
   :host h1 {
     margin: 0;
     padding: 0;
+  }
+  :host section {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
   }
 `;
