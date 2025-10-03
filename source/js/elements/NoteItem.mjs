@@ -49,8 +49,8 @@ export class NoteItem extends BaseCustomElement {
 
 NoteItem.htmlString = `
   <li>
-    <slot></slot>
     <action-button class="danger">&times;</action-button>
+    <slot></slot>
   </li>
 `;
 
