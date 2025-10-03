@@ -1,26 +1,20 @@
 import { BaseCustomElement } from '../elements.mjs';
-import { notesState } from '../states/notes.mjs';
+import { EventHandler } from '../events.mjs';
 
-class StateChangeHandler {
+class CreateNoteHandler extends EventHandler {
+  handleEvent(event) {
+    const detail = event?.detail;
+    const text = detail?.text;
 
-  /**
-   * @param {import('../elements.mjs').BaseCustomElement} host
-   */
-  constructor(host) {
-    this.host = host;
-  }
+    if (typeof text !== 'string' || text.trim() === '') return;
 
-  next(data) {
-    const ul = this.host.shadowRoot.querySelector('ul');
-    console.log('next', data);
-  }
+    const listElement = this.host.shadowRoot.querySelector('ul');
 
-  error(err) {
-    console.error(err);
-  }
+    if (listElement instanceof Node === false) return;
 
-  complete() {
-    console.log('complete');
+    const newListItem = document.createElement('note-item');
+    newListItem.textContent = text;
+    listElement.appendChild(newListItem);
   }
 }
 
@@ -33,8 +27,7 @@ export class NotesList extends BaseCustomElement {
 
   constructor() {
     super();
-
-    this.notesStateChangeHandler = new StateChangeHandler(this);
+    this.createNoteHandler = new CreateNoteHandler(this);
   }
 
   /**
@@ -52,7 +45,8 @@ export class NotesList extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    notesState.subscribe(this.notesStateChangeHandler);
+    const creator = this.getRootNode().querySelector('notes-creator');
+    creator.addEventListener('note.create', this.createNoteHandler);
   }
 
   /**
@@ -74,17 +68,17 @@ export class NotesList extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    notesState.unsubscribe(this.notesStateChangeHandler);
+    this.removeEventListener('note.create', this.createNoteHandler);
   }
 
 }
 
-NotesList.htmlString = `
-  <ul>
-    <note-item>Note 1</note-item>
-    <note-item>Note 2</note-item>
-    <note-item>Note 3</note-item>
-  </ul>
-`;
+NotesList.htmlString = `<ul></ul>`;
 
-NotesList.cssString = ``;
+NotesList.cssString = `
+  :host ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+`;
