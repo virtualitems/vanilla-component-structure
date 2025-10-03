@@ -1,4 +1,12 @@
 import { BaseCustomElement } from '../elements.mjs';
+import { EventHandler } from '../events.mjs';
+
+class ClickHandler extends EventHandler {
+  handleEvent(event) {
+    console.log(event.type);
+    this.host.dispatchEvent(new Event('click', { bubbles: true, composed: true }));
+  }
+}
 
 export class ActionButton extends BaseCustomElement {
 
@@ -6,6 +14,11 @@ export class ActionButton extends BaseCustomElement {
    * @type {string}
    */
   static tagName = 'action-button';
+
+  constructor() {
+    super();
+    this.clickHandler = new ClickHandler(this);
+  }
 
   /**
    * @function
@@ -22,6 +35,7 @@ export class ActionButton extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
+    this.shadowRoot.querySelector('button').addEventListener('click', this.clickHandler);
   }
 
   /**
@@ -43,6 +57,7 @@ export class ActionButton extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
+    this.shadowRoot.querySelector('button').removeEventListener('click', this.clickHandler);
   }
 
 }
