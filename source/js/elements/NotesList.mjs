@@ -1,9 +1,14 @@
 import { BaseCustomElement } from '../elements.mjs';
 import { EventHandler } from '../events.mjs';
 
+class ClickNoteButtonHandler extends EventHandler {
+  handleEvent() {
+    this.host.dispatchCustomEvent('note.delete');
+  }
+}
+
 class DeleteNoteHandler extends EventHandler {
-  handleEvent(event) {
-    event.stopPropagation();
+  handleEvent() {
     this.host.remove();
   }
 }
@@ -59,10 +64,11 @@ export class NotesList extends BaseCustomElement {
     if (listElement instanceof Node === false) return;
 
     const item = document.createElement('note-item');
+    item.addEventListener('note.delete', new DeleteNoteHandler(item));
     item.textContent = text;
 
     const button = item.shadowRoot.querySelector('action-button');
-    button?.addEventListener('click', new DeleteNoteHandler(item));
+    button?.addEventListener('click', new ClickNoteButtonHandler(button));
 
     listElement.appendChild(item);
   }
