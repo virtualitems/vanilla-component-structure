@@ -1,4 +1,4 @@
-import { BaseCustomElement } from './BaseCustomElement.mjs';
+import { BaseCustomElement } from '../elements.mjs';
 
 export class ActionButton extends BaseCustomElement {
 

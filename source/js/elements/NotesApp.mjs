@@ -1,11 +1,11 @@
-import { BaseCustomElement } from './BaseCustomElement.mjs';
+import { BaseCustomElement } from '../elements.mjs';
 
-export class NoteItem extends BaseCustomElement {
+export class NotesApp extends BaseCustomElement {
 
   /**
    * @type {string}
    */
-  static tagName = 'note-item';
+  static tagName = 'notes-app';
 
   /**
    * @function
@@ -47,11 +47,17 @@ export class NoteItem extends BaseCustomElement {
 
 }
 
-NoteItem.htmlString = `
-  <li>
-    <slot></slot>
-    <action-button class="danger">&times;</action-button>
-  </li>
+NotesApp.htmlString = `
+  <section>
+    <h1>Notes App</h1>
+    <notes-creator data-form-method="post" data-form-action="#"></notes-creator>
+    <notes-list></notes-list>
+  </section>
 `;
 
-NoteItem.cssString = ``;
+NotesApp.cssString = `
+  :host h1 {
+    margin: 0;
+    padding: 0;
+  }
+`;
