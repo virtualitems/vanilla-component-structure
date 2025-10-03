@@ -41,4 +41,13 @@ export class BaseCustomElement extends HTMLElement {
       this.shadowRoot.adoptedStyleSheets.push(stylesheet);
     }
   }
+
+  /**
+   * @param {string} eventName
+   * @param {Object} detail
+   */
+  dispatchCustomEvent(eventName, detail = {}) {
+    const payload = { detail, bubbles: true, composed: true };
+    this.dispatchEvent(new CustomEvent(eventName, payload));
+  }
 }
