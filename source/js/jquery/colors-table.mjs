@@ -11,44 +11,6 @@ const language = {
   url: $table.data(`lang-url-${lang}`),
 };
 
-async function ajax(tabledata, done, settings) {
-  const page = Math.floor(tabledata.start / tabledata.length) + 1;
-
-  const params = new URLSearchParams({ page: page, per_page: tabledata.length });
-
-  const url = new URL($table.data('ajax-url'));
-  url.search = params.toString();
-
-  try {
-    const response = await fetch(url, { headers: { 'x-api-key': 'reqres-free-v1' } });
-
-    if (response.ok === false) throw new Error(response.statusText);
-
-    const json = await response.json();
-
-    console.debug('response json:', json);
-
-    done({
-      draw: tabledata.draw,
-      recordsTotal: json.total,
-      recordsFiltered: json.total,
-      data: json.data,
-    });
-
-  } catch (err) {
-    console.error(err);
-
-    done({
-      draw: tabledata.draw,
-      recordsTotal: 0,
-      recordsFiltered: 0,
-      data: [],
-    });
-
-  }
-
-};
-
 const columns = [
   {
     data: 'id',
@@ -120,3 +82,48 @@ export const $datatable = $table
     ajax,
     columns,
   });
+
+
+/**
+ * @param {Object} tabledata
+ * @param {Function} done
+ * @param {Object} settings
+ * @returns {Promise<void>}
+ */
+async function ajax(tabledata, done, settings) {
+  const page = Math.floor(tabledata.start / tabledata.length) + 1;
+
+  const params = new URLSearchParams({ page: page, per_page: tabledata.length });
+
+  const url = new URL($table.data('ajax-url'));
+  url.search = params.toString();
+
+  try {
+    const response = await fetch(url, { headers: { 'x-api-key': 'reqres-free-v1' } });
+
+    if (response.ok === false) throw new Error(response.statusText);
+
+    const json = await response.json();
+
+    console.debug('response json:', json);
+
+    done({
+      draw: tabledata.draw,
+      recordsTotal: json.total,
+      recordsFiltered: json.total,
+      data: json.data,
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    done({
+      draw: tabledata.draw,
+      recordsTotal: 0,
+      recordsFiltered: 0,
+      data: [],
+    });
+
+  }
+
+};
