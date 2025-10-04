@@ -20,8 +20,12 @@ function ajax(tabledata, done, settings) {
   url.search = params.toString();
 
   fetch(url, { headers: { 'x-api-key': 'reqres-free-v1' } })
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok === false) throw new Error(response.statusText);
+      return response.json();
+    })
     .then(json => {
+      console.debug('response json:', json);
       done({
         draw: tabledata.draw,
         recordsTotal: json.total,
