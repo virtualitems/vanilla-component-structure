@@ -11,7 +11,7 @@ const language = {
   url: $table.data(`lang-url-${lang}`),
 };
 
-function ajax(tabledata, done, settings) {
+async function ajax(tabledata, done, settings) {
   const page = Math.floor(tabledata.start / tabledata.length) + 1;
 
   const params = new URLSearchParams({ page: page, per_page: tabledata.length });
@@ -19,29 +19,34 @@ function ajax(tabledata, done, settings) {
   const url = new URL($table.data('ajax-url'));
   url.search = params.toString();
 
-  fetch(url, { headers: { 'x-api-key': 'reqres-free-v1' } })
-    .then(response => {
-      if (response.ok === false) throw new Error(response.statusText);
-      return response.json();
-    })
-    .then(json => {
-      console.debug('response json:', json);
-      done({
-        draw: tabledata.draw,
-        recordsTotal: json.total,
-        recordsFiltered: json.total,
-        data: json.data,
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      done({
-        draw: tabledata.draw,
-        recordsTotal: 0,
-        recordsFiltered: 0,
-        data: [],
-      });
+  try {
+    const response = await fetch(url, { headers: { 'x-api-key': 'reqres-free-v1' } });
+
+    if (response.ok === false) throw new Error(response.statusText);
+
+    const json = await response.json();
+
+    console.debug('response json:', json);
+
+    done({
+      draw: tabledata.draw,
+      recordsTotal: json.total,
+      recordsFiltered: json.total,
+      data: json.data,
     });
+
+  } catch (err) {
+    console.error(err);
+
+    done({
+      draw: tabledata.draw,
+      recordsTotal: 0,
+      recordsFiltered: 0,
+      data: [],
+    });
+
+  }
+
 };
 
 const columns = [
