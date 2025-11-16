@@ -1,6 +1,6 @@
 import { BaseCustomElement } from './shared/elements.mjs';
 import { EventHandler } from './shared/events.mjs';
-import { notes } from './shared/storages.mjs';
+import { notesEventTarget } from './shared/states.mjs';
 
 class FormSubmitHandler extends EventHandler {
 
@@ -32,11 +32,7 @@ class FormSubmitHandler extends EventHandler {
       return;
     }
 
-    const values = new Map(notes.getValue());
-
-    values.set(data.id, data);
-
-    notes.next(values);
+    notesEventTarget.create(data);
 
     form.reset();
   }

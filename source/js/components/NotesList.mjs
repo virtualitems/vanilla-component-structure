@@ -1,58 +1,44 @@
 import { BaseCustomElement } from './shared/elements.mjs';
-import { notes } from './shared/storages.mjs';
+import { notesEventTarget } from './shared/states.mjs';
+import { EventHandler } from './shared/events.mjs';
 
 import { NoteItem } from './NoteItem.mjs';
 
-class NotesListObserver {
+class NotesCreateHandler extends EventHandler {
   constructor(host) {
-    this.host = host;
-    // Mantener registro de los IDs renderizados
-    this.renderedIds = new Set();
+    super(host);
   }
 
-  next(values) {
-    if (!(values instanceof Map)) {
-      return;
-    }
-
+  /**
+   * @param {CustomEvent} event
+   */
+  handleEvent(event) {
+    const note = event.detail;
     const ul = this.host.shadowRoot.querySelector('ul');
-    const newIds = new Set(values.keys());
 
-    // Eliminar elementos que ya no existen
-    this.renderedIds.forEach(id => {
-      if (newIds.has(id)) {
-        return;
-      }
+    const li = document.createElement(NoteItem.tagName);
+    li.setAttribute('data-note-id', note.id);
+    li.textContent = note.text;
+    ul.appendChild(li);
+  }
+}
 
-      const existingElement = ul.querySelector(`[data-note-id="${id}"]`);
-
-      if (existingElement) {
-        existingElement.remove();
-      }
-
-      this.renderedIds.delete(id);
-    });
-
-    // Añadir solo los elementos nuevos
-    Array.from(values.values()).forEach(note => {
-      if (this.renderedIds.has(note.id)) {
-        return;
-      }
-
-      const li = document.createElement(NoteItem.tagName);
-      li.setAttribute('data-note-id', note.id);
-      li.textContent = note.text;
-      ul.appendChild(li);
-      this.renderedIds.add(note.id);
-    });
+class NotesDeleteHandler extends EventHandler {
+  constructor(host) {
+    super(host);
   }
 
-  error(err) {
-    console.error(err);
-  }
+  /**
+   * @param {CustomEvent} event
+   */
+  handleEvent(event) {
+    const { id } = event.detail;
+    const ul = this.host.shadowRoot.querySelector('ul');
+    const existingElement = ul.querySelector(`[data-note-id="${id}"]`);
 
-  complete() {
-    console.info('NotesListObserver: complete');
+    if (existingElement) {
+      existingElement.remove();
+    }
   }
 }
 
@@ -65,7 +51,8 @@ export class NotesList extends BaseCustomElement {
 
   constructor() {
     super();
-    this.notesListObserver = new NotesListObserver(this);
+    this.notesCreateHandler = new NotesCreateHandler(this);
+    this.notesDeleteHandler = new NotesDeleteHandler(this);
   }
 
   /**
@@ -83,7 +70,8 @@ export class NotesList extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    notes.subscribe(this.notesListObserver);
+    notesEventTarget.addEventListener('notes.create', this.notesCreateHandler);
+    notesEventTarget.addEventListener('notes.delete', this.notesDeleteHandler);
   }
 
   /**
@@ -105,7 +93,8 @@ export class NotesList extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    notes.unsubscribe(this.notesListObserver);
+    notesEventTarget.removeEventListener('notes.create', this.notesCreateHandler);
+    notesEventTarget.removeEventListener('notes.delete', this.notesDeleteHandler);
   }
 }
 

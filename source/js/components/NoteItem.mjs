@@ -1,6 +1,6 @@
 import { BaseCustomElement } from './shared/elements.mjs';
 import { EventHandler } from './shared/events.mjs';
-import { notes } from './shared/storages.mjs';
+import { notesEventTarget } from './shared/states.mjs';
 
 class DeleteButtonClickHandler extends EventHandler {
 
@@ -11,11 +11,7 @@ class DeleteButtonClickHandler extends EventHandler {
     const item = this.host;
     const id = item.getAttribute('data-note-id');
 
-    const values = new Map(notes.getValue());
-
-    values.delete(id);
-
-    notes.next(values);
+    notesEventTarget.delete({ id });
   }
 }
 
