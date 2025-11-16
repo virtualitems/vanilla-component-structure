@@ -1,6 +1,7 @@
 import { BaseCustomElement } from './shared/elements.mjs';
 import { EventHandler } from './shared/events.mjs';
 import { notesEventTarget } from './shared/states.mjs';
+import { on } from './shared/on.mjs';
 
 class FormSubmitHandler extends EventHandler {
 
@@ -22,15 +23,17 @@ class FormSubmitHandler extends EventHandler {
     const form = this.host.shadowRoot.querySelector('form');
     const formData = new FormData(form);
 
-    const data = {
-      id: this.nextID(),
-      text: formData.get('text')?.toString()?.trim(),
-      createdAt: new Date().toISOString()
-    };
+    const text = formData.get('text')?.toString()?.trim();
 
-    if (!data.text) {
+    if (!text) {
       return;
     }
+
+    const data = {
+      id: this.nextID(),
+      text,
+      createdAt: new Date().toISOString()
+    };
 
     notesEventTarget.create(data);
 
@@ -65,7 +68,7 @@ export class NotesCreatorForm extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    this.shadowRoot.querySelector('form').addEventListener('submit', this.formSubmitHandler);
+    this.shadowRoot.querySelector('form').addEventListener(on.submit, this.formSubmitHandler);
   }
 
   /**
@@ -87,7 +90,7 @@ export class NotesCreatorForm extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    this.shadowRoot.querySelector('form').removeEventListener('submit', this.formSubmitHandler);
+    this.shadowRoot.querySelector('form').removeEventListener(on.submit, this.formSubmitHandler);
   }
 
 }

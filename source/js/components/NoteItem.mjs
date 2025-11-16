@@ -1,6 +1,7 @@
 import { BaseCustomElement } from './shared/elements.mjs';
 import { EventHandler } from './shared/events.mjs';
 import { notesEventTarget } from './shared/states.mjs';
+import { on } from './shared/on.mjs';
 
 class DeleteButtonClickHandler extends EventHandler {
 
@@ -42,7 +43,7 @@ export class NoteItem extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    this.shadowRoot.querySelector('button').addEventListener('click', this.deleteButtonClickHandler);
+    this.shadowRoot.querySelector('button').addEventListener(on.click, this.deleteButtonClickHandler);
   }
 
   /**
@@ -64,7 +65,7 @@ export class NoteItem extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    this.shadowRoot.querySelector('button').removeEventListener('click', this.deleteButtonClickHandler);
+    this.shadowRoot.querySelector('button').removeEventListener(on.click, this.deleteButtonClickHandler);
   }
 
 }

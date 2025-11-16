@@ -1,5 +1,5 @@
 import { BaseCustomElement } from './shared/elements.mjs';
-import { notesEventTarget } from './shared/states.mjs';
+import { NotesEventTarget, notesEventTarget } from './shared/states.mjs';
 import { EventHandler } from './shared/events.mjs';
 
 import { NoteItem } from './NoteItem.mjs';
@@ -70,8 +70,8 @@ export class NotesList extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    notesEventTarget.addEventListener('notes.create', this.notesCreateHandler);
-    notesEventTarget.addEventListener('notes.delete', this.notesDeleteHandler);
+    notesEventTarget.addEventListener(NotesEventTarget.actions.CREATE, this.notesCreateHandler);
+    notesEventTarget.addEventListener(NotesEventTarget.actions.DELETE, this.notesDeleteHandler);
   }
 
   /**
