@@ -70,8 +70,8 @@ export class NotesList extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    notesEventTarget.onCreate(this.notesCreateHandler);
-    notesEventTarget.onDelete(this.notesDeleteHandler);
+    notesEventTarget.addEventListener(notesEventTarget.actions.CREATE, this.notesCreateHandler);
+    notesEventTarget.addEventListener(notesEventTarget.actions.DELETE, this.notesDeleteHandler);
   }
 
   /**
@@ -93,8 +93,8 @@ export class NotesList extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    notesEventTarget.removeOnCreate(this.notesCreateHandler);
-    notesEventTarget.removeOnDelete(this.notesDeleteHandler);
+    notesEventTarget.removeEventListener(notesEventTarget.actions.CREATE, this.notesCreateHandler);
+    notesEventTarget.removeEventListener(notesEventTarget.actions.DELETE, this.notesDeleteHandler);
   }
 }
 

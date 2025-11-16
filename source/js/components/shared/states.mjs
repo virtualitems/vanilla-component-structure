@@ -1,39 +1,26 @@
-export class NotesEventTarget extends EventTarget {
+export class CustomEventTarget extends EventTarget {
+  constructor(actions) {
+    super();
 
-  static actions = Object.freeze({
-    CREATE: 'notes.create',
-    DELETE: 'notes.delete'
-  });
+    if (actions === undefined || actions === null || actions.constructor !== Object) {
+      throw new TypeError('actions must be an object.');
+    }
 
-  create(detail) {
-    this.dispatchCustomEvent(detail, NotesEventTarget.actions.CREATE);
+    this.actions = Object.freeze(actions);
   }
 
-  onCreate(listener) {
-    this.addEventListener(NotesEventTarget.actions.CREATE, listener);
-  }
-
-  removeOnCreate(listener) {
-    this.removeEventListener(NotesEventTarget.actions.CREATE, listener);
-  }
-
-  delete(detail) {
-    this.dispatchCustomEvent(detail, NotesEventTarget.actions.DELETE);
-  }
-
-  onDelete(listener) {
-    this.addEventListener(NotesEventTarget.actions.DELETE, listener);
-  }
-
-  removeOnDelete(listener) {
-    this.removeEventListener(NotesEventTarget.actions.DELETE, listener);
-  }
-
+  /**
+   * Dispatches a custom event.
+   *
+   * @param {unknown} detail
+   * @param {string} eventName
+   * @returns {boolean}
+   */
   dispatchCustomEvent(detail, eventName) {
     const payload = {
       detail,
       bubbles: true,
-      composed: true
+      composed: true,
     };
 
     const event = new CustomEvent(eventName, payload);
@@ -42,4 +29,7 @@ export class NotesEventTarget extends EventTarget {
   }
 }
 
-export const notesEventTarget = new NotesEventTarget();
+export const notesEventTarget = new CustomEventTarget({
+  CREATE: 'notes.create',
+  DELETE: 'notes.delete',
+});
