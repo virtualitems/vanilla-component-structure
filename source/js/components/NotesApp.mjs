@@ -1,21 +1,5 @@
 import { BaseCustomElement } from './shared/elements.mjs';
-import { EventHandler } from './shared/events.mjs';
 import { NotesList } from './NotesList.mjs';
-
-class CreateNoteHandler extends EventHandler {
-  handleEvent(event) {
-    const detail = event?.detail;
-    const text = detail?.text;
-
-    if (typeof text !== 'string' || text.trim() === '') return;
-
-    const listElement = this.host.shadowRoot.querySelector('notes-list');
-
-    if (listElement instanceof NotesList === false) return;
-
-    listElement.addNote(text);
-  }
-}
 
 export class NotesApp extends BaseCustomElement {
 
@@ -23,11 +7,6 @@ export class NotesApp extends BaseCustomElement {
    * @type {string}
    */
   static tagName = 'notes-app';
-
-  constructor() {
-    super();
-    this.createNoteHandler = new CreateNoteHandler(this);
-  }
 
   /**
    * @function
@@ -44,7 +23,6 @@ export class NotesApp extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    this.addEventListener('note.create', this.createNoteHandler);
   }
 
   /**
@@ -66,7 +44,6 @@ export class NotesApp extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    this.removeEventListener('note.create', this.createNoteHandler);
   }
 
 }

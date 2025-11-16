@@ -2,34 +2,52 @@ import { BaseCustomElement } from './shared/elements.mjs';
 import { EventHandler } from './shared/events.mjs';
 import { notes } from './shared/storages.mjs';
 
-class DeleteButtonClickHandler extends EventHandler {
+class FormSubmitHandler extends EventHandler {
+
+  constructor(host) {
+    super(host);
+    this.currentID = 0;
+  }
+
+  nextID() {
+    this.currentID += 1;
+    return this.currentID.toString();
+  }
 
   /**
-   * @param {MouseEvent} event
+   * @param {SubmitEvent} event
    */
-  handleEvent() {
-    const item = this.host;
-    const id = item.getAttribute('data-note-id');
+  handleEvent(event) {
+    event.preventDefault();
+    const form = this.host.shadowRoot.querySelector('form');
+    const formData = new FormData(form);
+
+    const data = {
+      id: this.nextID(),
+      text: formData.get('text')?.toString()?.trim(),
+      createdAt: new Date().toISOString()
+    };
+
+    if (!data.text) {
+      return;
+    }
 
     const values = new Map(notes.getValue());
 
-    values.delete(id);
+    values.set(data.id, data);
 
     notes.next(values);
+
+    form.reset();
   }
 }
 
-export class NoteItem extends BaseCustomElement {
+export class NotesCreatorForm extends BaseCustomElement {
 
   /**
    * @type {string}
    */
-  static tagName = 'note-item';
-
-  constructor() {
-    super();
-    this.deleteButtonClickHandler = new DeleteButtonClickHandler(this);
-  }
+  static tagName = 'notes-creator';
 
   /**
    * @function
@@ -41,12 +59,17 @@ export class NoteItem extends BaseCustomElement {
     return ['class', 'id', 'lang', 'style', 'title'];
   }
 
+  constructor() {
+    super();
+    this.formSubmitHandler = new FormSubmitHandler(this);
+  }
+
   /**
    * @function
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
-    this.shadowRoot.querySelector('button').addEventListener('click', this.deleteButtonClickHandler);
+    this.shadowRoot.querySelector('form').addEventListener('submit', this.formSubmitHandler);
   }
 
   /**
@@ -68,21 +91,21 @@ export class NoteItem extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
-    this.shadowRoot.querySelector('button').removeEventListener('click', this.deleteButtonClickHandler);
+    this.shadowRoot.querySelector('form').removeEventListener('submit', this.formSubmitHandler);
   }
 
 }
 
-NoteItem.htmlString = `
-  <li>
-    <button>&times;</button>
-    <slot></slot>
-  </li>
+NotesCreatorForm.htmlString = `
+  <form>
+    <input type="text" name="text" placeholder="New note" />
+    <button type="submit">Add</button>
+  </form>
 `;
 
-NoteItem.cssString = `
+NotesCreatorForm.cssString = `
   :host button {
-    background-color: #f44336;
+    background-color: #008CBA;
     color: white;
     padding: 2px 5px;
     text-align: center;
@@ -93,14 +116,13 @@ NoteItem.cssString = `
     cursor: pointer;
     transition-duration: 0.4s;
     border-radius: 5px;
-    border: 1px solid #f44336;
-    user-select: none;
+    border: 1px solid #91999bff;
   }
 
   :host button:hover,
   :host button:active {
     background-color: white;
     color: black;
-    border: 1px solid #f44336;
+    border: 1px solid #008CBA;
   }
 `;

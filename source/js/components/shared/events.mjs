@@ -20,8 +20,8 @@ export class EventHandler {
       throw new TypeError('Cannot construct EventHandler instances directly');
     }
 
-    if ((host instanceof BaseCustomElement) === false) {
-      throw new TypeError('host must be an implementation of BaseCustomElement');
+    if ((host instanceof HTMLElement) === false) {
+      throw new TypeError('host must be an instance of HTMLElement');
     }
 
     this.host = host;

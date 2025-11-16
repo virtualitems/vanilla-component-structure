@@ -1,15 +1,40 @@
 import { BaseCustomElement } from './shared/elements.mjs';
-import { EventHandler } from './shared/events.mjs';
+import { notes } from './shared/storages.mjs';
 
-class ClickNoteButtonHandler extends EventHandler {
-  handleEvent() {
-    this.host.dispatchCustomEvent('note.delete');
+import { NoteItem } from './NoteItem.mjs';
+
+class NotesListObserver {
+  constructor(host) {
+    this.host = host;
   }
-}
 
-class DeleteNoteHandler extends EventHandler {
-  handleEvent() {
-    this.host.remove();
+  next(values) {
+    if (!(values instanceof Map)) {
+      return;
+    }
+
+    const ul = this.host.shadowRoot.querySelector('ul');
+
+    ul.innerHTML = '';
+
+    if (values.size === 0) {
+      return;
+    }
+
+    Array.from(values.values()).forEach(note => {
+      const li = document.createElement(NoteItem.tagName);
+      li.setAttribute('data-note-id', note.id);
+      li.textContent = note.text;
+      ul.appendChild(li);
+    });
+  }
+
+  error(err) {
+    console.error(err);
+  }
+
+  complete() {
+    console.info('NotesListObserver: complete');
   }
 }
 
@@ -19,6 +44,11 @@ export class NotesList extends BaseCustomElement {
    * @type {string}
    */
   static tagName = 'notes-list';
+
+  constructor() {
+    super();
+    this.notesListObserver = new NotesListObserver(this);
+  }
 
   /**
    * @function
@@ -35,6 +65,7 @@ export class NotesList extends BaseCustomElement {
    */
   connectedCallback() {
     console.log('ƒ connectedCallback');
+    notes.subscribe(this.notesListObserver);
   }
 
   /**
@@ -56,23 +87,8 @@ export class NotesList extends BaseCustomElement {
    */
   disconnectedCallback() {
     console.log('ƒ disconnectedCallback');
+    notes.unsubscribe(this.notesListObserver);
   }
-
-  addNote(text) {
-    const listElement = this.shadowRoot.querySelector('ul');
-
-    if (listElement instanceof Node === false) return;
-
-    const item = document.createElement('note-item');
-    item.addEventListener('note.delete', new DeleteNoteHandler(item));
-    item.textContent = text;
-
-    const button = item.shadowRoot.querySelector('action-button');
-    button?.addEventListener('click', new ClickNoteButtonHandler(button));
-
-    listElement.appendChild(item);
-  }
-
 }
 
 NotesList.htmlString = `<ul></ul>`;
