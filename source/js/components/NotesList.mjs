@@ -6,6 +6,8 @@ import { NoteItem } from './NoteItem.mjs';
 class NotesListObserver {
   constructor(host) {
     this.host = host;
+    // Mantener registro de los IDs renderizados
+    this.renderedIds = new Set();
   }
 
   next(values) {
@@ -14,18 +16,34 @@ class NotesListObserver {
     }
 
     const ul = this.host.shadowRoot.querySelector('ul');
+    const newIds = new Set(values.keys());
 
-    ul.innerHTML = '';
+    // Eliminar elementos que ya no existen
+    this.renderedIds.forEach(id => {
+      if (newIds.has(id)) {
+        return;
+      }
 
-    if (values.size === 0) {
-      return;
-    }
+      const existingElement = ul.querySelector(`[data-note-id="${id}"]`);
 
+      if (existingElement) {
+        existingElement.remove();
+      }
+
+      this.renderedIds.delete(id);
+    });
+
+    // Añadir solo los elementos nuevos
     Array.from(values.values()).forEach(note => {
+      if (this.renderedIds.has(note.id)) {
+        return;
+      }
+
       const li = document.createElement(NoteItem.tagName);
       li.setAttribute('data-note-id', note.id);
       li.textContent = note.text;
       ul.appendChild(li);
+      this.renderedIds.add(note.id);
     });
   }
 
