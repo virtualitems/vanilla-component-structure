@@ -1,6 +1,6 @@
 import { BaseCustomElement } from './shared/elements.mjs';
 import { EventHandler } from './shared/events.mjs';
-import { NotesEventTarget } from './shared/states.mjs';
+import { notesEventTarget } from './shared/states.mjs';
 import { on } from './shared/on.mjs';
 
 class FormSubmitHandler extends EventHandler {
@@ -35,7 +35,7 @@ class FormSubmitHandler extends EventHandler {
       createdAt: new Date().toISOString()
     };
 
-    NotesEventTarget.create(data);
+    notesEventTarget.create(data);
 
     form.reset();
   }

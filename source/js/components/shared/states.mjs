@@ -5,31 +5,31 @@ export class NotesEventTarget extends EventTarget {
     DELETE: 'notes.delete'
   });
 
-  static create(detail) {
+  create(detail) {
     this.dispatchCustomEvent(detail, NotesEventTarget.actions.CREATE);
   }
 
-  static onCreate(listener) {
+  onCreate(listener) {
     this.addEventListener(NotesEventTarget.actions.CREATE, listener);
   }
 
-  static removeOnCreate(listener) {
+  removeOnCreate(listener) {
     this.removeEventListener(NotesEventTarget.actions.CREATE, listener);
   }
 
-  static delete(detail) {
+  delete(detail) {
     this.dispatchCustomEvent(detail, NotesEventTarget.actions.DELETE);
   }
 
-  static onDelete(listener) {
+  onDelete(listener) {
     this.addEventListener(NotesEventTarget.actions.DELETE, listener);
   }
 
-  static removeOnDelete(listener) {
+  removeOnDelete(listener) {
     this.removeEventListener(NotesEventTarget.actions.DELETE, listener);
   }
 
-  static dispatchCustomEvent(detail, eventName) {
+  dispatchCustomEvent(detail, eventName) {
     const payload = {
       detail,
       bubbles: true,
@@ -41,3 +41,5 @@ export class NotesEventTarget extends EventTarget {
     return this.dispatchEvent(event);
   }
 }
+
+export const notesEventTarget = new NotesEventTarget();
