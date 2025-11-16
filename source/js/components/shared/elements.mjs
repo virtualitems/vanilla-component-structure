@@ -46,7 +46,7 @@ export class BaseCustomElement extends HTMLElement {
    * @param {string} eventName
    * @param {Object} detail
    */
-  dispatchCustomEvent(eventName, detail = {}) {
+  dispatchCustomEvent(eventName, detail) {
     const payload = { detail, bubbles: true, composed: true };
     this.dispatchEvent(new CustomEvent(eventName, payload));
   }

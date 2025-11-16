@@ -16,7 +16,7 @@ export class CustomEventTarget extends EventTarget {
    * @param {string} eventName
    * @returns {boolean}
    */
-  dispatchCustomEvent(detail, eventName) {
+  dispatchCustomEvent(eventName, detail) {
     const event = new CustomEvent(eventName, { detail });
     return this.dispatchEvent(event);
   }

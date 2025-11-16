@@ -1,5 +1,4 @@
 import { BaseCustomElement } from './shared/elements.mjs';
-import { NotesList } from './NotesList.mjs';
 
 export class NotesApp extends BaseCustomElement {
 

@@ -35,7 +35,7 @@ class FormSubmitHandler extends EventHandler {
       createdAt: new Date().toISOString()
     };
 
-    notesEventTarget.dispatchCustomEvent(data, notesEventTarget.actions.CREATE);
+    notesEventTarget.dispatchCustomEvent(notesEventTarget.actions.CREATE, data);
 
     form.reset();
   }

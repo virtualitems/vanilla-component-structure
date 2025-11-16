@@ -12,7 +12,7 @@ class DeleteButtonClickHandler extends EventHandler {
     const item = this.host;
     const id = item.getAttribute('data-note-id');
 
-    notesEventTarget.dispatchCustomEvent({ id }, notesEventTarget.actions.DELETE);
+    notesEventTarget.dispatchCustomEvent(notesEventTarget.actions.DELETE, { id });
   }
 }
 
