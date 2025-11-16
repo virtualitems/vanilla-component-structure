@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'https://esm.sh/rxjs@7.8.2';
+
 export class NotesEventTarget extends EventTarget {
 
   static actions = Object.freeze({
@@ -7,16 +9,18 @@ export class NotesEventTarget extends EventTarget {
 
   constructor() {
     super();
-    this.state = new Map();
+    this.state = new BehaviorSubject(new Map());
 
     this.addEventListener(NotesEventTarget.actions.CREATE, (event) => {
       const { id, text, createdAt } = event.detail;
-      this.state.set(id, { id, text, createdAt });
+      this.state.getValue().set(id, { id, text, createdAt });
+      this.state.next(this.state.getValue());
     });
 
     this.addEventListener(NotesEventTarget.actions.DELETE, (event) => {
       const { id } = event.detail;
-      this.state.delete(id);
+      this.state.getValue().delete(id);
+      this.state.next(this.state.getValue());
     });
   }
 
@@ -42,4 +46,3 @@ export class NotesEventTarget extends EventTarget {
 }
 
 export const notesEventTarget = new NotesEventTarget();
-window.notesEventTarget = notesEventTarget;
