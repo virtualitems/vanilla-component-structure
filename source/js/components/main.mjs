@@ -1,8 +1,8 @@
-import { ActionButton } from './elements/ActionButton.mjs';
-import { NoteItem } from './elements/NoteItem.mjs';
-import { NotesApp } from './elements/NotesApp.mjs';
-import { NotesCreator } from './elements/NotesCreator.mjs';
-import { NotesList } from './elements/NotesList.mjs';
+import { ActionButton } from './ActionButton.mjs';
+import { NoteItem } from './NoteItem.mjs';
+import { NotesApp } from './NotesApp.mjs';
+import { NotesCreator } from './NotesCreator.mjs';
+import { NotesList } from './NotesList.mjs';
 
 customElements.define(ActionButton.tagName, ActionButton);
 customElements.define(NoteItem.tagName, NoteItem);

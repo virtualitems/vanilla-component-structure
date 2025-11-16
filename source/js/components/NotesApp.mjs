@@ -1,5 +1,5 @@
-import { BaseCustomElement } from '../elements.mjs';
-import { EventHandler } from '../events.mjs';
+import { BaseCustomElement } from './shared/elements.mjs';
+import { EventHandler } from './shared/events.mjs';
 import { NotesList } from './NotesList.mjs';
 
 class CreateNoteHandler extends EventHandler {
