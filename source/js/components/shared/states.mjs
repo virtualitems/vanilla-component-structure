@@ -17,14 +17,7 @@ export class CustomEventTarget extends EventTarget {
    * @returns {boolean}
    */
   dispatchCustomEvent(detail, eventName) {
-    const payload = {
-      detail,
-      bubbles: true,
-      composed: true,
-    };
-
-    const event = new CustomEvent(eventName, payload);
-
+    const event = new CustomEvent(eventName, { detail });
     return this.dispatchEvent(event);
   }
 }
