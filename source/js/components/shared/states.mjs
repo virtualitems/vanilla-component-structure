@@ -25,14 +25,14 @@ export class NotesEventTarget extends EventTarget {
   }
 
   create(detail) {
-    this.dispatchEvent(detail, NotesEventTarget.actions.CREATE);
+    this.dispatchCustomEvent(detail, NotesEventTarget.actions.CREATE);
   }
 
   delete(detail) {
-    this.dispatchEvent(detail, NotesEventTarget.actions.DELETE);
+    this.dispatchCustomEvent(detail, NotesEventTarget.actions.DELETE);
   }
 
-  dispatchEvent(detail, eventName) {
+  dispatchCustomEvent(detail, eventName) {
     const payload = {
       detail,
       bubbles: true,
@@ -41,7 +41,7 @@ export class NotesEventTarget extends EventTarget {
 
     const event = new CustomEvent(eventName, payload);
 
-    return super.dispatchEvent(event);
+    return this.dispatchEvent(event);
   }
 }
 
