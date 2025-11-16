@@ -1,5 +1,3 @@
-import { BehaviorSubject } from 'https://esm.sh/rxjs@7.8.2';
-
 export class NotesEventTarget extends EventTarget {
 
   static actions = Object.freeze({
@@ -7,32 +5,31 @@ export class NotesEventTarget extends EventTarget {
     DELETE: 'notes.delete'
   });
 
-  constructor() {
-    super();
-    this.state = new BehaviorSubject(new Map());
-
-    this.addEventListener(NotesEventTarget.actions.CREATE, (event) => {
-      const { id, text, createdAt } = event.detail;
-      this.state.getValue().set(id, { id, text, createdAt });
-      this.state.next(this.state.getValue());
-    });
-
-    this.addEventListener(NotesEventTarget.actions.DELETE, (event) => {
-      const { id } = event.detail;
-      this.state.getValue().delete(id);
-      this.state.next(this.state.getValue());
-    });
-  }
-
-  create(detail) {
+  static create(detail) {
     this.dispatchCustomEvent(detail, NotesEventTarget.actions.CREATE);
   }
 
-  delete(detail) {
+  static onCreate(listener) {
+    this.addEventListener(NotesEventTarget.actions.CREATE, listener);
+  }
+
+  static removeOnCreate(listener) {
+    this.removeEventListener(NotesEventTarget.actions.CREATE, listener);
+  }
+
+  static delete(detail) {
     this.dispatchCustomEvent(detail, NotesEventTarget.actions.DELETE);
   }
 
-  dispatchCustomEvent(detail, eventName) {
+  static onDelete(listener) {
+    this.addEventListener(NotesEventTarget.actions.DELETE, listener);
+  }
+
+  static removeOnDelete(listener) {
+    this.removeEventListener(NotesEventTarget.actions.DELETE, listener);
+  }
+
+  static dispatchCustomEvent(detail, eventName) {
     const payload = {
       detail,
       bubbles: true,
@@ -44,5 +41,3 @@ export class NotesEventTarget extends EventTarget {
     return this.dispatchEvent(event);
   }
 }
-
-export const notesEventTarget = new NotesEventTarget();
