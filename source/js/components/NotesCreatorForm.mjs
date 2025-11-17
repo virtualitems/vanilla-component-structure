@@ -1,7 +1,7 @@
-import { BaseCustomElement } from './shared/elements.mjs';
-import { EventHandler } from './shared/events.mjs';
-import { notesEventTarget } from './shared/states.mjs';
-import { on } from './shared/on.mjs';
+import { BaseCustomElement } from '../shared/elements.mjs';
+import { EventHandler } from '../shared/events.mjs';
+import { notesEventTarget } from '../shared/states.mjs';
+import { on } from '../shared/on.mjs';
 
 class FormSubmitHandler extends EventHandler {
 
@@ -67,7 +67,6 @@ export class NotesCreatorForm extends BaseCustomElement {
    * @function
    */
   connectedCallback() {
-    console.log('ƒ connectedCallback');
     this.shadowRoot.querySelector('form').addEventListener(on.submit, this.formSubmitHandler);
   }
 
@@ -75,21 +74,20 @@ export class NotesCreatorForm extends BaseCustomElement {
    * @function
    */
   attributeChangedCallback(attributeName, oldValue, newValue) {
-    console.log('ƒ attributeChangedCallback', attributeName, oldValue, newValue);
+    //
   }
 
   /**
    * @function
    */
   adoptedCallback() {
-    console.log('ƒ adoptedCallback');
+    //
   }
 
   /**
    * @function
    */
   disconnectedCallback() {
-    console.log('ƒ disconnectedCallback');
     this.shadowRoot.querySelector('form').removeEventListener(on.submit, this.formSubmitHandler);
   }
 

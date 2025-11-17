@@ -1,4 +1,4 @@
-import { BaseCustomElement } from './shared/elements.mjs';
+import { BaseCustomElement } from '../shared/elements.mjs';
 
 export class NotesApp extends BaseCustomElement {
 
@@ -21,28 +21,28 @@ export class NotesApp extends BaseCustomElement {
    * @function
    */
   connectedCallback() {
-    console.log('ƒ connectedCallback');
+    //
   }
 
   /**
    * @function
    */
   attributeChangedCallback(attributeName, oldValue, newValue) {
-    console.log('ƒ attributeChangedCallback', attributeName, oldValue, newValue);
+    //
   }
 
   /**
    * @function
    */
   adoptedCallback() {
-    console.log('ƒ adoptedCallback');
+    //
   }
 
   /**
    * @function
    */
   disconnectedCallback() {
-    console.log('ƒ disconnectedCallback');
+    //
   }
 
 }

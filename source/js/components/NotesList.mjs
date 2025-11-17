@@ -1,6 +1,6 @@
-import { BaseCustomElement } from './shared/elements.mjs';
-import { notesEventTarget } from './shared/states.mjs';
-import { EventHandler } from './shared/events.mjs';
+import { BaseCustomElement } from '../shared/elements.mjs';
+import { notesEventTarget } from '../shared/states.mjs';
+import { EventHandler } from '../shared/events.mjs';
 
 import { NoteItem } from './NoteItem.mjs';
 
@@ -69,7 +69,6 @@ export class NotesList extends BaseCustomElement {
    * @function
    */
   connectedCallback() {
-    console.log('ƒ connectedCallback');
     notesEventTarget.addEventListener(notesEventTarget.actions.CREATE, this.notesCreateHandler);
     notesEventTarget.addEventListener(notesEventTarget.actions.DELETE, this.notesDeleteHandler);
   }
@@ -78,21 +77,20 @@ export class NotesList extends BaseCustomElement {
    * @function
    */
   attributeChangedCallback(attributeName, oldValue, newValue) {
-    console.log('ƒ attributeChangedCallback', attributeName, oldValue, newValue);
+    //
   }
 
   /**
    * @function
    */
   adoptedCallback() {
-    console.log('ƒ adoptedCallback');
+    //
   }
 
   /**
    * @function
    */
   disconnectedCallback() {
-    console.log('ƒ disconnectedCallback');
     notesEventTarget.removeEventListener(notesEventTarget.actions.CREATE, this.notesCreateHandler);
     notesEventTarget.removeEventListener(notesEventTarget.actions.DELETE, this.notesDeleteHandler);
   }
