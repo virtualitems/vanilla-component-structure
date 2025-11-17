@@ -2,6 +2,7 @@ import { BaseCustomElement } from '../shared/elements.mjs';
 import { EventHandler } from '../shared/events.mjs';
 import { notesEventTarget } from '../shared/states.mjs';
 import { on } from '../shared/on.mjs';
+import { i18n } from '../shared/languages.mjs';
 
 class FormSubmitHandler extends EventHandler {
 
@@ -67,7 +68,18 @@ export class NotesCreatorForm extends BaseCustomElement {
    * @function
    */
   connectedCallback() {
-    this.shadowRoot.querySelector('form').addEventListener(on.submit, this.formSubmitHandler);
+    const form = this.shadowRoot.querySelector('form');
+    const input = form.querySelector('input[name="text"]');
+    const button = form.querySelector('button[type="submit"]');
+
+    if (input) {
+      input.placeholder = i18n.t('form.placeholder');
+    }
+    if (button) {
+      button.textContent = i18n.t('form.button');
+    }
+
+    form.addEventListener(on.submit, this.formSubmitHandler);
   }
 
   /**

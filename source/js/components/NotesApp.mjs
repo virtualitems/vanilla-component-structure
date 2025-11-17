@@ -1,4 +1,5 @@
 import { BaseCustomElement } from '../shared/elements.mjs';
+import { i18n } from '../shared/languages.mjs';
 
 export class NotesApp extends BaseCustomElement {
 
@@ -21,7 +22,10 @@ export class NotesApp extends BaseCustomElement {
    * @function
    */
   connectedCallback() {
-    //
+    const h1 = this.shadowRoot.querySelector('h1');
+    if (h1) {
+      h1.textContent = i18n.t('app.title');
+    }
   }
 
   /**
