@@ -1,5 +1,3 @@
-import { BaseCustomElement } from './elements.mjs';
-
 /**
  * @template {import('./elements.mjs').BaseCustomElement} E
  * @implements {EventListenerObject}
