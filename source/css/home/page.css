@@ -1,7 +1,10 @@
-main {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+:root {
+  --primary-color: #205295;
+  --secondary-color: #0A2647;
+  --accent-color: #A5D7E8;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
