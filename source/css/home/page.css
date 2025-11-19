@@ -1,9 +1,3 @@
-:root {
-  --primary-color: #205295;
-  --secondary-color: #0A2647;
-  --accent-color: #A5D7E8;
-}
-
 body {
   display: grid;
   grid-template-rows: auto 1fr auto;
