@@ -2,19 +2,445 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/home/page.css">
-  <link rel="preconnect" href="https://esm.sh">
 </head>
 
+<!--
+# app de publicaciones
+
+## componentes
+
+- header
+    - logo
+    - nombre de la app
+
+- form de nueva publicacion
+    - área de contenido
+        - campo de texto
+        - previsualizacion de imagen
+        - previsualizacion de video
+    - barra de opciones de publicacion
+        - publicar imagen
+        - publicar video
+    - boton enviar
+
+- feed
+    - publicacion
+        - contenido
+        - autor
+        - fecha
+            - comentarios
+            - likes
+
+- footer
+    - descripción de la app
+    - derechos reservados
+    - informacion de contacto
+
+-->
+
 <body>
-  <main>
-    <notes-app></notes-app>
-  </main>
-  <script type="module" src="js/main.mjs"></script>
+  <header id="site-header">
+    <img class="logo" src="https://imageplaceholder.net/60" alt="logo">
+    <h1 class="site-name">Native Web Components</h1>
+  </header>
+
+  <section class="container mb-5" id="publish">
+    <form class="new-post-form">
+      <input type="text" name="author" placeholder="Author Name">
+      <div class="content-area">
+        <div class="text-content">
+          <textarea name="text-content" placeholder="What's on your mind?"></textarea>
+        </div>
+        <div class="d-none image-content-preview">
+          <img src="" alt="">
+        </div>
+        <div class="d-none video-content-preview">
+          <video src="" controls></video>
+        </div>
+      </div>
+      <div class="publication-options">
+        <button type="button">
+          Image
+        </button>
+        <button type="button">
+          Video
+        </button>
+        <button type="submit">
+          Publish
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="container mb-5" id="feed">
+    <div class="post">
+      <div class="post-content">
+        <p>
+          Nisi nostrud sint ipsum nisi laboris labore dolor anim sit. Et elit eiusmod tempor sunt tempor aute
+          incididunt aute magna aute proident ea. Adipisicing id irure sint dolor nisi ex excepteur. Proident minim sint
+          magna cupidatat duis culpa labore sunt dolor reprehenderit occaecat do ea. Consectetur voluptate excepteur
+          nisi voluptate id ut. Sunt proident dolore magna fugiat dolor ea veniam amet fugiat aute duis.
+        </p>
+      </div>
+      <div class="post-info">
+        <div class="likes">
+          <i class="like-icon">♥</i> <span class="like-count">0</span>
+        </div>
+        <div class="post-author">
+          Author
+        </div>
+        <div class="post-date">
+          2025-10-24
+        </div>
+      </div>
+      <details>
+        <summary class="commentss">
+          <h2>Comments</h2>
+        </summary>
+        <div class="comment">
+          <div class="comment-author">Commenter 1</div>
+          <div class="comment-content">Great post!</div>
+        </div>
+        <div class="comment">
+          <div class="comment-author">Commenter 2</div>
+          <div class="comment-content">Thanks for sharing!</div>
+        </div>
+      </details>
+  </section>
+
+  <footer id="site-footer">
+    <div class="site-description">
+      <p>
+        Site description. Exercitation voluptate sunt cupidatat ex et fugiat consectetur ullamco laborum nisi enim ut
+        fugiat. Id eiusmod magna irure consequat ex irure adipisicing duis magna anim deserunt ex.
+      </p>
+    </div>
+    <div class="site-info">
+      <div class="rights-reserved">All rights reserved</div>
+      <div class="contact">Contact us</div>
+    </div>
+  </footer>
+
+  <style>
+    :root {
+      --primary-color: #205295;
+      --secondary-color: #0A2647;
+      --accent-color: #A5D7E8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100vh;
+      min-width: 100%;
+    }
+
+    body {
+      display: grid;
+      font-family: sans-serif;
+      font-size: 16px;
+      grid-template-rows: auto 1fr auto;
+      line-height: 1.15;
+    }
+
+    #site-header {
+      align-items: center;
+      background-color: black;
+      color: white;
+      display: flex;
+      gap: 1rem;
+      justify-content: left;
+      padding: 1rem;
+    }
+
+    #site-header .logo {
+      border-radius: 8px;
+    }
+
+    #site-header .site-name {
+      font-size: 1.4rem;
+      font-weight: unset;
+    }
+
+    #publish .new-post-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    #publish .new-post-form input[name="author"] {
+      padding: 0.7rem;
+      width: 100%;
+    }
+
+    #publish .new-post-form textarea[name="text-content"] {
+      min-height: 100px;
+      padding: 0.7rem;
+      width: 100%;
+    }
+
+    #publish .new-post-form .publication-options {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+
+    #publish .new-post-form button[type="button"] {
+      padding: 0.5rem 1rem;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      border: unset;
+    }
+
+    #publish .new-post-form button[type="button"]:hover {
+      background-color: var(--secondary-color);
+    }
+
+    #publish .new-post-form button[type="button"]:active {
+      background-color: var(--primary-color);
+    }
+
+    #publish .new-post-form button[type="submit"] {
+      padding: 0.5rem 1rem;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      border: unset;
+    }
+
+    #publish .new-post-form button[type="submit"]:hover {
+      background-color: var(--secondary-color);
+    }
+
+    #publish .new-post-form button[type="submit"]:active {
+      background-color: var(--primary-color);
+    }
+
+    #feed {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-height: 50vh;
+      overflow-y: scroll;
+    }
+
+    #feed .post {
+      background-color: white;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    #feed .post-content p {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    #feed .post-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 0.75rem;
+    }
+
+    #feed .post-author {
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-right: 1rem;
+    }
+
+    #feed .post-date {
+      color: #999;
+      font-size: 0.85rem;
+    }
+
+    #feed .post-info .likes {
+      align-items: center;
+      display: flex;
+      gap: 0.5rem;
+      cursor: pointer;
+      width: fit-content;
+      flex: 1;
+    }
+
+    #feed .post-info .like-icon {
+      color: #999;
+      font-style: normal;
+      transition: color 0.2s;
+    }
+
+    #feed .post-info .likes:hover .like-icon {
+      color: var(--primary-color);
+    }
+
+    #feed .post-info .like-count {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    #feed details {
+      border-top: 1px solid #f0f0f0;
+      padding-top: 1rem;
+    }
+
+    #feed details summary {
+      cursor: pointer;
+      list-style: none;
+      margin-bottom: 0.75rem;
+    }
+
+    #feed details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    #feed details summary h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+      display: inline-block;
+    }
+
+    #feed details summary h2::before {
+      content: "▶ ";
+      display: inline-block;
+      transition: transform 0.2s;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    #feed details[open] summary h2::before {
+      transform: rotate(90deg);
+    }
+
+    #feed details .comment {
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    #feed details .comment:last-child {
+      margin-bottom: 0;
+    }
+
+    #feed .comments {
+      border-top: 1px solid #f0f0f0;
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    #feed .comments h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    #feed .comment {
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      padding: 0.75rem;
+    }
+
+    #feed .comment-author {
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    #feed .comment-content {
+      color: #555;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    #site-footer {
+      background-color: #f5f5f5;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    #site-footer .site-description {
+      flex: 1;
+    }
+
+    #site-footer .site-description p {
+      color: #666;
+      font-size: 0.9rem;
+      text-align: justify;
+      width: 50%;
+    }
+
+    #site-footer .site-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+
+    #site-footer .rights-reserved,
+    #site-footer .contact {
+      /* color: #999; */
+      font-size: 0.85rem;
+    }
+
+    .d-none {
+      display: none;
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 800px;
+      padding: 1rem;
+      width: 100%;
+    }
+
+    .mb-1 {
+      margin-bottom: 0.25rem;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-3 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mb-5 {
+      margin-bottom: 3rem;
+    }
+  </style>
 </body>
 
 </html>
