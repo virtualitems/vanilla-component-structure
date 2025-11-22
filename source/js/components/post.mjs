@@ -19,7 +19,7 @@ export class Post extends BaseCustomElement {
   // methods
 
   connectedCallback() {
-    this.replaceTextContent('text-content-view', this.getAttribute('data-content'));
+    // this.replaceTextContent('text-content-view', this.getAttribute('data-content'));
     this.replaceTextContent('author', this.getAttribute('data-author'));
     this.replaceTextContent('date', this.getAttribute('data-date'));
     this.replaceTextContent('likes-count', this.getAttribute('data-likes') || '0');
@@ -31,7 +31,7 @@ export class Post extends BaseCustomElement {
 
 Post.html = `
   <div class="post-content">
-    <p id="text-content-view"></p>
+    <p><slot></slot></p>
   </div>
 
   <div class="post-info">
@@ -76,7 +76,7 @@ Post.css = `
     padding: 1.5rem !important;
   }
 
-  #text-content-view {
+  ::slotted(*) {
     color: #333;
     line-height: 1.6;
   }

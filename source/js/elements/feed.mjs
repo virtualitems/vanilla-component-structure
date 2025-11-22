@@ -8,10 +8,10 @@ postsSubject.addCreatePostListener(function (event) {
 
   const el = document.createElement('app-post');
   el.setAttribute('data-id', date.getTime().toString());
-  el.setAttribute('data-content', data['text-content-area']);
   el.setAttribute('data-author', data['author']);
   el.setAttribute('data-date', date.toISOString().split('T')[0]);
   el.setAttribute('data-likes', '0');
+  el.innerText = data['text-content-input'];
 
   rootElement.appendChild(el);
 });
