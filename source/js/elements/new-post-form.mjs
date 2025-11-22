@@ -6,8 +6,9 @@ rootElement.addEventListener('submit', function (event) {
   event.preventDefault();
 
   const formData = new FormData(rootElement);
+  const plainData = Object.fromEntries(formData);
 
-  const payload = { detail: formData };
+  const payload = { detail: plainData };
 
   const type = PostsSubject.events.CREATE_POST;
 
