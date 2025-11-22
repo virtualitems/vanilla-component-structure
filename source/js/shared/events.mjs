@@ -1,28 +1,24 @@
 /**
- * @template {import('./elements.mjs').BaseCustomElement} E
- * @implements {EventListenerObject}
+ * @template {import('./elements.mjs').BaseCustomElement | null} E
+ * @extends {EventListenerObject}
  */
 export class EventHandler {
 
   /**
    * @type {E}
    */
-  host;
+  target;
 
   /**
-   * @param {E} host
+   * @param {E} target
    */
-  constructor(host) {
+  constructor(target) {
 
     if (new.target === EventHandler) {
       throw new TypeError('Cannot construct EventHandler instances directly');
     }
 
-    if ((host instanceof HTMLElement) === false) {
-      throw new TypeError('host must be an instance of HTMLElement');
-    }
-
-    this.host = host;
+    this.target = target;
   }
 
   /**
