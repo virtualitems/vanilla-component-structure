@@ -1,8 +1,8 @@
-import { postsSubject } from '../subjects/posts.mjs';
+import { PostsSubject } from '../subjects/posts.mjs';
 
 const rootElement = document.getElementById('feed');
 
-postsSubject.addCreatePostListener(function (event) {
+PostsSubject.addEventListener(PostsSubject.events.CREATE_POST, function (event) {
   const data = event.detail;
   const date = new Date();
 

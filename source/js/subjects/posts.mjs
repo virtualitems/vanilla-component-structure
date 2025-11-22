@@ -1,18 +1,5 @@
 import { Subject } from '../shared/subjects.mjs';
 
-class CreatePostEvent extends CustomEvent {
-
-  static type = 'create-post';
-
-  /**
-   * @template T
-   * @param {CustomEventInit<T>} eventInitDict
-   */
-  constructor(eventInitDict) {
-    super(CreatePostEvent.type, eventInitDict);
-  }
-}
-
 /**
  * @description Observable subject for posts
  */
@@ -22,6 +9,10 @@ export class PostsSubject extends Subject
 
   // static attributes
 
+  static events = Object.freeze({
+    CREATE_POST: 'create-post',
+  });
+
   // Constructor
 
   // getters/setters
@@ -29,19 +20,6 @@ export class PostsSubject extends Subject
   // static getters/setters
 
   // methods
-
-  createPost(detail) {
-    const event = new CreatePostEvent({ detail });
-    this.dispatchEvent(event);
-  }
-
-  addCreatePostListener(listener) {
-    this.addEventListener(CreatePostEvent.type, listener);
-  }
-
-  removeCreatePostListener(listener) {
-    this.removeEventListener(CreatePostEvent.type, listener);
-  }
 
   // static methods
 
