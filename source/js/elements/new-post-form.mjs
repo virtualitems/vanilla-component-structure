@@ -1,4 +1,4 @@
-import { PostsSubject } from '../subjects/posts.mjs';
+import { PostsSubject } from 'subjects/posts.mjs';
 
 const rootElement = document.getElementById('new-post-form');
 

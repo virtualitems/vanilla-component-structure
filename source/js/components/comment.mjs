@@ -1,4 +1,4 @@
-import { BaseCustomElement } from '../shared/elements.mjs';
+import { BaseCustomElement } from 'shared/elements.mjs';
 
 /**
  * @description Represents a comment on a post

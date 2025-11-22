@@ -1,4 +1,4 @@
-import { Subject } from '../shared/subjects.mjs';
+import { Subject } from 'shared/subjects.mjs';
 
 /**
  * @description Observable subject for post comments

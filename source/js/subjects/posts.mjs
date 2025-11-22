@@ -1,4 +1,4 @@
-import { SingletonSubject } from '../shared/subjects.mjs';
+import { SingletonSubject } from 'shared/subjects.mjs';
 
 /**
  * @description Observable subject for posts

@@ -1,6 +1,6 @@
-import { BaseCustomElement } from '../shared/elements.mjs';
-import { EventHandler } from '../shared/events.mjs';
-import { CommentsSubject } from '../subjects/comments.mjs';
+import { BaseCustomElement } from 'shared/elements.mjs';
+import { EventHandler } from 'shared/events.mjs';
+import { CommentsSubject } from 'subjects/comments.mjs';
 
 class SubmitCreateCommentHandler extends EventHandler {
 
