@@ -1,4 +1,4 @@
-import { createInstance } from 'https://esm.sh/i18next@25.6.2';
+import { createInstance } from 'i18next';
 
 const i18n = createInstance();
 
