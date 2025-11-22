@@ -42,7 +42,7 @@ Post.html = `
     <div id="date"></div>
   </div>
 
-  <details>
+  <details id="comments">
     <summary class="commentss">
       <h2>Comments</h2>
     </summary>
@@ -62,18 +62,6 @@ Post.html = `
       />
       <button type="submit">Post Comment</button>
     </form>
-
-    <app-comment
-      data-author="Commenter 1"
-      data-content="Great post!"
-      data-date="2025-11-20"
-    ></app-comment>
-
-    <app-comment
-      data-author="Commenter 2"
-      data-content="Thanks for sharing!"
-      data-date="2025-11-21"
-    ></app-comment>
   </details>
 `;
 
@@ -137,29 +125,29 @@ Post.css = `
     color: var(--primary-color);
   }
 
-  details {
+  #comments {
     border-top: 1px solid #f0f0f0;
     padding-top: 1rem;
   }
 
-  details summary {
+  #comments summary {
     cursor: pointer;
     list-style: none;
     margin-bottom: 0.75rem;
   }
 
-  details summary::-webkit-details-marker {
+  #comments summary::-webkit-details-marker {
     display: none;
   }
 
-  details summary h2 {
+  #comments summary h2 {
     font-size: 1rem;
     font-weight: 500;
     color: #333;
     display: inline-block;
   }
 
-  details summary h2::before {
+  #comments summary h2::before {
     content: "▶ ";
     display: inline-block;
     transition: transform 0.2s;
