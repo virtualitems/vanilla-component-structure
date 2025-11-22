@@ -35,6 +35,10 @@ export class BaseCustomElement extends HTMLElement {
       throw new TypeError('BaseCustomElement is an abstract class and cannot be instantiated directly.');
     }
 
+    if (this.hasAttribute('data-id') === false) {
+      throw new Error('Custom elements must have a "data-id" attribute.');
+    }
+
     const { html, css } = this.constructor;
 
     // shadow
