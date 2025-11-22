@@ -1,5 +1,5 @@
 /**
- * A collection of standard DOM event names.
+ * @description A collection of standard DOM event names.
  */
 export const on = Object.freeze({
   abort: 'abort',

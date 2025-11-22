@@ -1,4 +1,12 @@
+/**
+ * @description Base class for custom HTML elements.
+ * @abstract
+ */
 export class BaseCustomElement extends HTMLElement {
+
+  // attributes
+
+  // static attributes
 
   /**
    * @type {string|null}
@@ -14,6 +22,8 @@ export class BaseCustomElement extends HTMLElement {
    * @type {string|null}
    */
   static css = null;
+
+  // Constructor
 
   /**
    * @constructor
@@ -40,6 +50,21 @@ export class BaseCustomElement extends HTMLElement {
       stylesheet.replace(css);
       this.shadowRoot.adoptedStyleSheets.push(stylesheet);
     }
+  }
+
+  // getters/setters
+
+  // static getters/setters
+
+  // methods
+
+  /**
+   * @param {string} eventName
+   * @param {Object} detail
+   */
+  dispatchCustomEvent(eventName, detail) {
+    const payload = { detail, bubbles: true, composed: true };
+    this.dispatchEvent(new CustomEvent(eventName, payload));
   }
 
   /**
@@ -84,12 +109,6 @@ export class BaseCustomElement extends HTMLElement {
     //
   }
 
-  /**
-   * @param {string} eventName
-   * @param {Object} detail
-   */
-  dispatchCustomEvent(eventName, detail) {
-    const payload = { detail, bubbles: true, composed: true };
-    this.dispatchEvent(new CustomEvent(eventName, payload));
-  }
-}
+  // static methods
+
+} //:: class
