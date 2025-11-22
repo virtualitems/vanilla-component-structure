@@ -68,6 +68,14 @@ export class BaseCustomElement extends HTMLElement {
   }
 
   /**
+   * @param {string} elementId
+   * @param {string|null|undefined} content
+   */
+  replaceTextContent(elementId, content) {
+    this.shadowRoot.getElementById(elementId).textContent = content ?? '';
+  }
+
+  /**
    * @override
    */
   adoptedCallback() {
