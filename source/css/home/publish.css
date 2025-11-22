@@ -1,28 +1,28 @@
-#publish .new-post-form {
+#new-post-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
 }
 
-#publish .new-post-form input[name="author"] {
+#new-post-form input[name="author"] {
   padding: 0.7rem;
   width: 100%;
 }
 
-#publish .new-post-form textarea[name="text-content"] {
+#new-post-form textarea[name="text-content"] {
   min-height: 100px;
   padding: 0.7rem;
   width: 100%;
 }
 
-#publish .new-post-form .publication-options {
+#new-post-form .publication-options {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
 }
 
-#publish .new-post-form button[type="button"] {
+#new-post-form button[type="button"] {
   padding: 0.5rem 1rem;
   background-color: var(--primary-color);
   border: none;
@@ -33,15 +33,15 @@
   border: unset;
 }
 
-#publish .new-post-form button[type="button"]:hover {
+#new-post-form button[type="button"]:hover {
   background-color: var(--secondary-color);
 }
 
-#publish .new-post-form button[type="button"]:active {
+#new-post-form button[type="button"]:active {
   background-color: var(--primary-color);
 }
 
-#publish .new-post-form button[type="submit"] {
+#new-post-form button[type="submit"] {
   padding: 0.5rem 1rem;
   background-color: var(--primary-color);
   border: none;
@@ -52,10 +52,10 @@
   border: unset;
 }
 
-#publish .new-post-form button[type="submit"]:hover {
+#new-post-form button[type="submit"]:hover {
   background-color: var(--secondary-color);
 }
 
-#publish .new-post-form button[type="submit"]:active {
+#new-post-form button[type="submit"]:active {
   background-color: var(--primary-color);
 }
