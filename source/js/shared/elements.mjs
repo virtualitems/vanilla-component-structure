@@ -1,19 +1,19 @@
 export class BaseCustomElement extends HTMLElement {
 
   /**
-   * @type {string}
+   * @type {string|null}
    */
-  static tagName = '';
+  static tagName = null;
 
   /**
    * @type {string|null}
    */
-  static htmlString = null;
+  static html = null;
 
   /**
    * @type {string|null}
    */
-  static cssString = null;
+  static css = null;
 
   /**
    * @constructor
@@ -25,19 +25,19 @@ export class BaseCustomElement extends HTMLElement {
       throw new TypeError('BaseCustomElement is an abstract class and cannot be instantiated directly.');
     }
 
-    const { htmlString, cssString } = this.constructor;
+    const { html, css } = this.constructor;
 
     // shadow
     this.attachShadow({ mode: 'open' });
 
-    if (typeof htmlString === 'string' && htmlString.length > 0) {
-      this.shadowRoot.innerHTML = htmlString;
+    if (typeof html === 'string' && html.length > 0) {
+      this.shadowRoot.innerHTML = html;
     }
 
     // styles
-    if (typeof cssString === 'string' && cssString.length > 0) {
+    if (typeof css === 'string' && css.length > 0) {
       const stylesheet = new CSSStyleSheet();
-      stylesheet.replace(cssString);
+      stylesheet.replace(css);
       this.shadowRoot.adoptedStyleSheets.push(stylesheet);
     }
   }
