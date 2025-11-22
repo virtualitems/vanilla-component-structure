@@ -30,12 +30,12 @@ export class BaseCustomElement extends HTMLElement {
     // shadow
     this.attachShadow({ mode: 'open' });
 
-    if (typeof html === 'string' && html.length > 0) {
+    if (('string' === typeof html) && (html.length > 0)) {
       this.shadowRoot.innerHTML = html;
     }
 
     // styles
-    if (typeof css === 'string' && css.length > 0) {
+    if (('string' === typeof css) && (css.length > 0)) {
       const stylesheet = new CSSStyleSheet();
       stylesheet.replace(css);
       this.shadowRoot.adoptedStyleSheets.push(stylesheet);
