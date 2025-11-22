@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-#new-post-form textarea[name="text-content"] {
+#new-post-form textarea {
   min-height: 100px;
   padding: 0.7rem;
   width: 100%;
