@@ -43,6 +43,48 @@ export class BaseCustomElement extends HTMLElement {
   }
 
   /**
+   * @override
+   */
+  adoptedCallback() {
+    //
+  }
+
+  /**
+   * @override
+   */
+  attributeChangedCallback() {
+    //
+  }
+
+  /**
+   * @override
+   */
+  connectedCallback() {
+    //
+  }
+
+  /**
+   * @override
+   */
+  connectedMoveCallback() {
+    //
+  }
+
+  /**
+   * @override
+   */
+  disconnectedCallback() {
+    //
+  }
+
+  /**
+   * @override
+   */
+  moveBefore() {
+    //
+  }
+
+  /**
    * @param {string} eventName
    * @param {Object} detail
    */
