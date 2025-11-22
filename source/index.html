@@ -48,40 +48,12 @@
   </section>
 
   <section class="container mb-5" id="feed">
-    <div class="post">
-      <div class="post-content">
-        <p>
-          Nisi nostrud sint ipsum nisi laboris labore dolor anim sit. Et elit eiusmod tempor sunt tempor aute
-          incididunt aute magna aute proident ea. Adipisicing id irure sint dolor nisi ex excepteur. Proident minim sint
-          magna cupidatat duis culpa labore sunt dolor reprehenderit occaecat do ea. Consectetur voluptate excepteur
-          nisi voluptate id ut. Sunt proident dolore magna fugiat dolor ea veniam amet fugiat aute duis.
-        </p>
-      </div>
-      <div class="post-info">
-        <div class="likes">
-          <i class="like-icon">♥</i> <span class="like-count">0</span>
-        </div>
-        <div class="post-author">
-          Author
-        </div>
-        <div class="post-date">
-          2025-10-24
-        </div>
-      </div>
-      <details>
-        <summary class="commentss">
-          <h2>Comments</h2>
-        </summary>
-        <div class="comment">
-          <div class="comment-author">Commenter 1</div>
-          <div class="comment-content">Great post!</div>
-        </div>
-        <div class="comment">
-          <div class="comment-author">Commenter 2</div>
-          <div class="comment-content">Thanks for sharing!</div>
-        </div>
-      </details>
-    </div>
+    <app-post
+      data-content="Nisi nostrud sint ipsum nisi laboris labore dolor anim sit. Et elit eiusmod tempor sunt tempor aute incididunt aute magna aute proident ea. Adipisicing id irure sint dolor nisi ex excepteur. Proident minim sint magna cupidatat duis culpa labore sunt dolor reprehenderit occaecat do ea. Consectetur voluptate excepteur nisi voluptate id ut. Sunt proident dolore magna fugiat dolor ea veniam amet fugiat aute duis."
+      data-author="Alejandro Carrasco"
+      data-date="2025-10-24"
+      data-likes="0"
+    ></app-post>
   </section>
 
   <footer id="site-footer">
@@ -96,6 +68,7 @@
       <div class="contact">Contact us</div>
     </div>
   </footer>
+  <script type="module" src="js/main.mjs"></script>
 </body>
 
 </html>

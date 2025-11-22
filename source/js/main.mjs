@@ -1,9 +1,5 @@
-import { NoteItem } from './components/NoteItem.mjs';
-import { NotesApp } from './components/NotesApp.mjs';
-import { NotesCreatorForm } from './components/NotesCreatorForm.mjs';
-import { NotesList } from './components/NotesList.mjs';
+import { Post } from './components/post.mjs';
+import { Comment } from './components/comment.mjs';
 
-customElements.define(NoteItem.tagName, NoteItem);
-customElements.define(NotesApp.tagName, NotesApp);
-customElements.define(NotesCreatorForm.tagName, NotesCreatorForm);
-customElements.define(NotesList.tagName, NotesList);
+customElements.define(Post.tagName, Post);
+customElements.define(Comment.tagName, Comment);
