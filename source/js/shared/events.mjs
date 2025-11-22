@@ -7,11 +7,6 @@ export class EventHandler {
 
   // attributes
 
-  /**
-   * @type {E}
-   */
-  target;
-
   // static attributes
 
   // Constructor
@@ -25,6 +20,7 @@ export class EventHandler {
       throw new TypeError('Cannot construct EventHandler instances directly');
     }
 
+    /** @type {E} */
     this.target = target;
   }
 

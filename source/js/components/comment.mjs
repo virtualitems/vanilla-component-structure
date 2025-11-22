@@ -19,7 +19,6 @@ export class Comment extends BaseCustomElement {
 
   connectedCallback() {
     this.replaceTextContent('author', this.getAttribute('data-author'));
-    this.replaceTextContent('content', this.getAttribute('data-content'));
     this.replaceTextContent('date', this.getAttribute('data-date'));
   }
 
@@ -30,7 +29,9 @@ export class Comment extends BaseCustomElement {
 Comment.html = `
   <div id="author"></div>
   <div id="date"></div>
-  <div id="content"></div>
+  <div id="content">
+    <slot></slot>
+  </div>
 `;
 
 Comment.css = `
@@ -55,7 +56,7 @@ Comment.css = `
     margin-bottom: 0.25rem;
   }
 
-  #content {
+  ::slotted(*) {
     color: #555;
     font-size: 0.9rem;
     line-height: 1.5;

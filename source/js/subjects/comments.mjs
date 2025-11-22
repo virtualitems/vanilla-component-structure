@@ -9,6 +9,10 @@ export class CommentsSubject extends Subject {
 
   // static attributes
 
+  static events = Object.freeze({
+    CREATE_COMMENT: 'create-comment',
+  });
+
   // Constructor
 
   // getters/setters

@@ -1,5 +1,41 @@
-
 import { BaseCustomElement } from '../shared/elements.mjs';
+import { EventHandler } from '../shared/events.mjs';
+import { CommentsSubject } from '../subjects/comments.mjs';
+
+class SubmitCreateCommentHandler extends EventHandler {
+
+  handleEvent(event) {
+    event.preventDefault();
+    const form = event.target;
+    const content = form.content.value.trim();
+    const author = form.author.value.trim();
+
+    if (!content || !author) {
+      return;
+    }
+
+    const detail = { content, author, date: new Date().toISOString() };
+    const type = CommentsSubject.events.CREATE_COMMENT;
+    const customEvent = new CustomEvent(type, { detail });
+    this.target.commentsSubject.dispatchEvent(customEvent);
+
+    form.reset();
+  }
+}
+
+class CommentCreatedHandler extends EventHandler {
+  handleEvent(event) {
+    const commentData = event.detail;
+    const commentsSection = this.target;
+
+    const el = document.createElement('app-comment');
+    el.setAttribute('data-author', commentData.author);
+    el.setAttribute('data-date', new Date(commentData.date).toLocaleString());
+    el.innerText = commentData.content;
+
+    commentsSection.appendChild(el);
+  }
+}
 
 /**
  * @description Represents a content post
@@ -12,6 +48,15 @@ export class Post extends BaseCustomElement {
 
   // Constructor
 
+  constructor() {
+    super();
+    this.commentsSubject = new CommentsSubject();
+    this.submitCreateCommentHandler = new SubmitCreateCommentHandler(this);
+
+    const commentsSection = this.shadowRoot.getElementById('comments');
+    this.commentCreatedHandler = new CommentCreatedHandler(commentsSection);
+  }
+
   // getters/setters
 
   // static getters/setters
@@ -19,10 +64,21 @@ export class Post extends BaseCustomElement {
   // methods
 
   connectedCallback() {
-    // this.replaceTextContent('text-content-view', this.getAttribute('data-content'));
     this.replaceTextContent('author', this.getAttribute('data-author'));
     this.replaceTextContent('date', this.getAttribute('data-date'));
     this.replaceTextContent('likes-count', this.getAttribute('data-likes') || '0');
+
+    const form = this.shadowRoot.querySelector('.new-comment-form');
+
+    form.addEventListener('submit', this.submitCreateCommentHandler);
+    this.commentsSubject.addEventListener(CommentsSubject.events.CREATE_COMMENT, this.commentCreatedHandler);
+  }
+
+  disconnectedCallback() {
+    const form = this.shadowRoot.querySelector('.new-comment-form');
+
+    form.removeEventListener('submit', this.submitCreateCommentHandler);
+    this.commentsSubject.removeEventListener(CommentsSubject.events.CREATE_COMMENT, this.commentCreatedHandler);
   }
 
   // static methods
